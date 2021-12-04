@@ -5,10 +5,8 @@
         <div class="col-sm-8 col-md-7 py-4">
           <h4 class="text-white">About</h4>
           <p class="text-muted">
-            Add some information about the album below, the author, or any other
-            background context. Make it a few sentences long so folks can pick
-            up some informative tidbits. Then, link them off to some social
-            networking sites or contact information.
+            This is an example on how to cetralize actions from different micro
+            frontends into one shell.
           </p>
         </div>
         <div class="col-sm-4 offset-md-1 py-4">
@@ -46,32 +44,20 @@
     </div>
   </div>
 </header>
-<!-- Button trigger modal -->
-<button
-  #triggerModalButton
-  hidden
-  type="button"
-  class="btn btn-primary"
-  data-bs-toggle="modal"
-  data-bs-target="#exampleModal"
->
-  Launch demo modal
-</button>
-
 <div
-  class="modal fade"
+  #modal
+  class="fade modal"
   [class.show]="showSearch"
   id="exampleModalLive"
   tabindex="-1"
   aria-labelledby="exampleModalLiveLabel"
-  style="display: block"
   aria-modal="true"
   role="dialog"
 >
   <div class="modal-dialog">
-    <div #modal class="modal-content">
+    <div #modalContent class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLiveLabel">Search</h5>
+        <strong class="modal-title" id="exampleModalLiveLabel">Search</strong>
         <button
           #closeButton
           type="button"
@@ -80,8 +66,14 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body">
-        <router-outlet name="articles"></router-outlet>
+      <div class="modal-body p-0">
+        <div class="p-3">
+          <input class="form-control" placeholder="Search actions" />
+        </div>
+        <hr class="mb-0" />
+        <div class="results p-1 pt-0" *ngIf="showSearch">
+          <router-outlet name="articles"></router-outlet>
+        </div>
       </div>
     </div>
   </div>
