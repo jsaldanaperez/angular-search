@@ -3,11 +3,15 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { SharedSearchModule } from '@angular-search/shared/search';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    FormsModule,
+    SharedSearchModule,
     RouterModule.forRoot([
       { path: '', loadChildren: () => import('articles/SearchModule').then(m => m.SearchModule), outlet: 'articles'}
     ], { initialNavigation: 'enabledBlocking' }),

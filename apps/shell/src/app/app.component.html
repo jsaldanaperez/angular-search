@@ -68,7 +68,14 @@
       </div>
       <div class="modal-body p-0">
         <div class="p-3">
-          <input class="form-control" placeholder="Search actions" />
+          <input
+            #searchControl
+            [(ngModel)]="searchValue"
+            [ngModelOptions]="{ standalone: true }"
+            (ngModelChange)="onSearch()"
+            class="form-control"
+            placeholder="Search actions"
+          />
         </div>
         <hr class="mb-0" />
         <div class="results p-1 pt-0" *ngIf="showSearch">
