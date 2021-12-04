@@ -80,10 +80,13 @@
         <hr class="mb-0" />
         <div class="results p-1 pt-0" *ngIf="showSearch">
           <router-outlet name="articles"></router-outlet>
+          <router-outlet name="customers"></router-outlet>
         </div>
       </div>
     </div>
   </div>
 </div>
 <div *ngIf="showSearch" class="modal-backdrop fade show"></div>
-<router-outlet></router-outlet>
+<div class="p-2">
+  <router-outlet></router-outlet>
+</div>

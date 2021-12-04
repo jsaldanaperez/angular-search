@@ -12,10 +12,25 @@ import { SharedSearchModule } from '@angular-search/shared/search';
     BrowserModule,
     FormsModule,
     SharedSearchModule,
-    RouterModule.forRoot([
-      { path: '', loadChildren: () => import('articles/SearchModule').then(m => m.SearchModule), outlet: 'articles'},
-      { path: 'articles', loadChildren: () => import('articles/RemoteEntryModule').then(m => m.RemoteEntryModule)}
-    ], { initialNavigation: 'enabledBlocking' }),
+    RouterModule.forRoot(
+      [
+        { path: '', loadChildren: () => import('articles/SearchModule').then((m) => m.SearchModule), outlet: 'articles'},
+        { path: '', loadChildren: () => import('customers/SearchModule').then((m) => m.SearchModule), outlet: 'customers'},
+        {
+          path: 'articles',
+          loadChildren: () =>
+            import('articles/RemoteEntryModule').then(
+              (m) => m.RemoteEntryModule
+            ),
+        },
+        {
+          path: 'customers',
+          loadChildren: () =>
+            import('customers/RemoteEntryModule').then((m) => m.RemoteEntryModule),
+        },
+      ],
+      { initialNavigation: 'enabledBlocking' }
+    ),
   ],
   providers: [],
   bootstrap: [AppComponent],

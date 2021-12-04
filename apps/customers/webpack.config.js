@@ -27,7 +27,7 @@ sharedMappings.register(
 
 module.exports = {
   output: {
-    uniqueName: 'shell',
+    uniqueName: 'customers',
     publicPath: 'auto',
     scriptType: 'text/javascript'
   },
@@ -42,10 +42,11 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      exposes: {},
-      remotes: {
-        "articles": "articles@http://localhost:4201/remoteEntry.js",
-    		"customers": 'customers@http://localhost:4202/remoteEntry.js',
+      name: 'customers',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './SearchModule' : 'apps/customers/src/app/search/search.module.ts',
+        './RemoteEntryModule': 'apps/customers/src/app/remote-entry/entry.module.ts',
       },
       shared: {
         '@angular/core': { singleton: true, strictVersion: true },
