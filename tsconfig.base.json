@@ -14,7 +14,9 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@angular-search/shared/search": ["libs/shared/search/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

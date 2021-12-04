@@ -45,7 +45,7 @@ module.exports = {
       name: 'articles',
       filename: 'remoteEntry.js',
       exposes: {
-        './Module': 'apps/articles/src/app/remote-entry/entry.module.ts',
+        './SearchModule': 'apps/articles/src/app/search/search.module.ts',
       },
       shared: {
         '@angular/core': { singleton: true, strictVersion: true },

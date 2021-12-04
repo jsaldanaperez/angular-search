@@ -20,7 +20,7 @@ const sharedMappings = new mf.SharedMappings();
 sharedMappings.register(
   tsConfigPath,
   [
-    /* mapped paths to share */
+    "@angular-search/shared/search"
   ],
   workspaceRootPath
 );

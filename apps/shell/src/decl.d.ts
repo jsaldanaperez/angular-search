@@ -1,1 +1,1 @@
-declare module 'articles/Module';
+declare module 'articles/SearchModule';
