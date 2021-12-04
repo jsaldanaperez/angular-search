@@ -1,6 +1,6 @@
 {
   "extends": "./tsconfig.json",
-  "include": ["**/*.ts"],
+  "include": ["**/*.ts", "../../libs/shared/search/src/lib/search-component.service.ts"],
   "compilerOptions": {
     "types": ["jest", "node"]
   }

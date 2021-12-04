@@ -4,7 +4,12 @@
     "outDir": "../../dist/out-tsc",
     "types": []
   },
-  "files": ["src/main.ts", "src/polyfills.ts", "src/app/search/search.module.ts" ],
+  "files": [
+    "src/main.ts", 
+    "src/polyfills.ts", 
+    "src/app/search/search.module.ts", 
+    "src/app/remote-entry/remote-entry.module.ts" 
+  ],
   "include": ["src/**/*.d.ts"],
   "exclude": ["**/*.test.ts", "**/*.spec.ts"]
 }

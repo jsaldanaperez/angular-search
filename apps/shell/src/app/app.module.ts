@@ -13,7 +13,8 @@ import { SharedSearchModule } from '@angular-search/shared/search';
     FormsModule,
     SharedSearchModule,
     RouterModule.forRoot([
-      { path: '', loadChildren: () => import('articles/SearchModule').then(m => m.SearchModule), outlet: 'articles'}
+      { path: '', loadChildren: () => import('articles/SearchModule').then(m => m.SearchModule), outlet: 'articles'},
+      { path: 'articles', loadChildren: () => import('articles/RemoteEntryModule').then(m => m.RemoteEntryModule)}
     ], { initialNavigation: 'enabledBlocking' }),
   ],
   providers: [],

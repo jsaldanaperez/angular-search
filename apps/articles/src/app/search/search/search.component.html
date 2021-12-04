@@ -1,4 +1,6 @@
-<angular-search-search-item
-  *ngFor="let item of filteredItems"
-  [value]="item"
-></angular-search-search-item>
+<angular-search-search domain="articles">
+  <angular-search-search-item
+    *ngFor="let item of filteredItems"
+    [value]="item"
+  ></angular-search-search-item>
+</angular-search-search>

@@ -45,6 +45,7 @@ module.exports = {
       name: 'articles',
       filename: 'remoteEntry.js',
       exposes: {
+        './RemoteEntryModule': 'apps/articles/src/app/remote-entry/remote-entry.module.ts',
         './SearchModule': 'apps/articles/src/app/search/search.module.ts',
       },
       shared: {

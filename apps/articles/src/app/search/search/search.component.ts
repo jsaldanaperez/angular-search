@@ -2,21 +2,15 @@ import { Component } from '@angular/core';
 import { SearchItem, SearchService } from '@angular-search/shared/search';
 import { Router } from '@angular/router';
 @Component({
-  selector: 'angular-search-search',
+  selector: 'angular-search-articles',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss']
+  styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent{
   searchItems: SearchItem[] = [
-    { name: 'Create article', description: 'Some description', navigate: () => alert('navigate')},
-    { name: 'Edit article', description: 'Some description', navigate: () => alert('navigate')},
-    { name: 'Create article', description: 'Some description', navigate: () => alert('navigate')},
-    { name: 'Create article', description: 'Some description', navigate: () => alert('navigate')},
-    { name: 'Create article', description: 'Some description', navigate: () => alert('navigate')},
-    { name: 'Create article', description: 'Some description', navigate: () => alert('navigate')},
-    { name: 'Create article', description: 'Some description', navigate: () => alert('navigate')},
-    { name: 'Create article', description: 'Some description', navigate: () => alert('navigate')},
-    { name: 'Create article last option', description: 'Some description', navigate: () => alert('navigate')}
+    { name: 'Articles', description: 'List of articles', path: ''},
+    { name: 'Create article', description: 'Some description', path: 'create'},
+    { name: 'Edit article', description: 'Some description', path: '1'},
   ];
   filteredItems: SearchItem[] = [];
   constructor(

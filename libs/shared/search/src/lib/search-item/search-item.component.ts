@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { PathSelectionService } from '../path-selection.service';
 import { SearchItem } from '../search-item';
 
 @Component({
@@ -8,5 +9,7 @@ import { SearchItem } from '../search-item';
 })
 export class SearchItemComponent {
   @Input() value!: SearchItem;
+  onClick = (value: string)  => this.pathSelectionService.setPath(value);
+  constructor(private pathSelectionService: PathSelectionService){}
 
 }
