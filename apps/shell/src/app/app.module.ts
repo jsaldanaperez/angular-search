@@ -9,7 +9,7 @@ import { RouterModule } from '@angular/router';
   imports: [
     BrowserModule,
     RouterModule.forRoot([
-      { path: '', loadChildren: () => import('articles/Module').then(m => m.RemoteEntryModule)}
+      { path: '', loadChildren: () => import('articles/Module').then(m => m.RemoteEntryModule), outlet: 'articles'}
     ], { initialNavigation: 'enabledBlocking' }),
   ],
   providers: [],

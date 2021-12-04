@@ -3,6 +3,7 @@
     "analytics": false
   },
   "version": 1,
+  "defaultProject": "apps/shell",
   "projects": {
     "articles": {
       "projectType": "application",
@@ -126,8 +127,13 @@
             "tsConfig": "apps/shell/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": ["apps/shell/src/favicon.ico", "apps/shell/src/assets"],
-            "styles": ["apps/shell/src/styles.scss"],
-            "scripts": [],
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "apps/shell/src/styles.scss"
+            ],
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ],
             "customWebpackConfig": {
               "path": "apps/shell/webpack.config.js"
             }
