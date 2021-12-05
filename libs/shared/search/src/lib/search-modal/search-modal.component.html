@@ -1,0 +1,43 @@
+<div
+  #modal
+  class="fade modal"
+  [class.show]="showSearch"
+  id="exampleModalLive"
+  tabindex="-1"
+  aria-labelledby="exampleModalLiveLabel"
+  aria-modal="true"
+  role="dialog"
+>
+  <div class="modal-dialog">
+    <div #modalContent class="modal-content">
+      <div class="modal-header">
+        <strong class="modal-title" id="exampleModalLiveLabel">Search</strong>
+        <button
+          #closeButton
+          type="button"
+          class="btn-close"
+          (click)="showSearch = false; closeButton.blur()"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body p-0">
+        <div class="p-3">
+          <input
+            tabindex="1"
+            #searchControl
+            [(ngModel)]="searchValue"
+            [ngModelOptions]="{ standalone: true }"
+            (ngModelChange)="onSearch()"
+            class="form-control"
+            placeholder="Search actions"
+          />
+        </div>
+        <hr class="mb-0" />
+        <div class="results p-1 pt-0" *ngIf="showSearch">
+          <ng-content></ng-content>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="showSearch" class="modal-backdrop fade show"></div>
