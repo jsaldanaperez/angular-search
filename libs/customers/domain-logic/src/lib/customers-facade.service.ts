@@ -45,7 +45,7 @@ export class CustomersFacadeService {
       setTimeout(() =>{
         observer.next(customer);
         observer.complete();
-      }, 500)
+      }, 1500)
     });
   }
 
