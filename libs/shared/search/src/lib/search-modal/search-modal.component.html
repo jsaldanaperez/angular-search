@@ -20,7 +20,7 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body p-0">
+      <div class="modal-body p-0" [class.lookup]="lookup">
         <div class="p-3">
           <input
             tabindex="1"
@@ -34,6 +34,11 @@
         </div>
         <hr class="mb-0" />
         <div class="results p-1 pt-0" *ngIf="showSearch">
+          <div *ngIf="lookup" class="d-flex justify-content-center p-2">
+            <div class="spinner-border spinner-border-sm" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
           <ng-content></ng-content>
         </div>
       </div>

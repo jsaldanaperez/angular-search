@@ -14,5 +14,5 @@ export class SearchService {
   }
   search(value: string): void{
     this.subject.next(value);
-  }  
+  }
 }

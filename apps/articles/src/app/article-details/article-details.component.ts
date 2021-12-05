@@ -12,6 +12,7 @@ export class ArticleDetailsComponent implements OnInit {
   isEditMode = false;
   article!: Article;
   loading = false;
+  isSaving = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -41,12 +42,9 @@ export class ArticleDetailsComponent implements OnInit {
   }
 
   onSave(){
+    this.isSaving = true;
     this.articlesFacade.update(this.article)
-      .subscribe(() => {
-        alert('Article updated');
-        this.router.navigate(['../', { relativeTo: this.activatedRoute}])
-      })
-
+      .subscribe(() => this.router.navigate(['../', { relativeTo: this.activatedRoute}]));
   }
 
 }

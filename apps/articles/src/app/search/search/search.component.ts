@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { SearchService } from '@angular-search/shared/search';
-import { ArticlesFacadeService } from '@angular-search/articles/domain-logic';
+import { LookUpService, SearchService } from '@angular-search/shared/search';
+import { Article, ArticlesFacadeService } from '@angular-search/articles/domain-logic';
 
 @Component({
   selector: 'angular-search-articles',
@@ -16,12 +16,13 @@ export class SearchComponent{
   };
 
   constructor(
+    lookupService: LookUpService,
     searchService: SearchService, 
     articlesFacadeService: ArticlesFacadeService){
       searchService.search$.subscribe((search) => {
         if(search){
           this.editArticle = undefined;
-          articlesFacadeService.find(search)
+          lookupService.execute<Article | undefined>(articlesFacadeService.find(search))
             .subscribe((article) => {
               if(article){
                 this.editArticle = {

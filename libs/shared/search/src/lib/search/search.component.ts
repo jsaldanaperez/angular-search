@@ -11,7 +11,7 @@ import { SearchService } from '../search.service';
 })
 export class SearchComponent implements AfterContentInit {
   @Input() domain!: string;
-  @ContentChildren(SearchItemComponent) searchItems!: QueryList<SearchItemComponent>
+  @ContentChildren(SearchItemComponent) searchItems!: QueryList<SearchItemComponent>;
 
   constructor(
     private searchService: SearchService,
@@ -24,6 +24,6 @@ export class SearchComponent implements AfterContentInit {
   public ngAfterContentInit(): void{
     this.searchService.search$.subscribe((value) =>{
       this.searchItems.forEach(item => item.visible = item.name.toLocaleLowerCase().includes(value.toLocaleLowerCase())) 
-    })
+    });
   }
 }

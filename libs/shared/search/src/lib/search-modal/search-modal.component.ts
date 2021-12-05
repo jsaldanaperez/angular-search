@@ -1,6 +1,7 @@
 import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { fromEvent, filter } from 'rxjs';
 import { SearchService } from '../search.service';
+import { LookUpService } from '../look-up.service';
 
 @Component({
   selector: 'angular-search-search-modal',
@@ -13,11 +14,17 @@ export class SearchModalComponent {
   @ViewChild('searchControl', { static: true}) searchControl!: ElementRef;
   showSearch = false;
   searchValue = '';
+  public lookup = false;
 
   
-  constructor(private renderer: Renderer2, private searchService: SearchService){
+  constructor(
+    private lookupService: LookUpService,
+    private renderer: Renderer2, 
+    private searchService: SearchService){
     this.subscribeToEvents();
     this.searchService.selected$.subscribe(() =>this.hideNavigation());
+    this.lookupService.lookup$.subscribe((lookup) => this.lookup = lookup);
+
   }
 
   private subscribeToEvents(): void{ 

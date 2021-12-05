@@ -13,6 +13,14 @@
         name="article-name"
       />
     </div>
-    <button class="btn btn-primary" type="submit">Save</button>
+    <button class="btn btn-primary" type="submit">
+      <span
+        *ngIf="isSaving"
+        class="spinner-border spinner-border-sm"
+        role="status"
+        aria-hidden="true"
+      ></span>
+      Save
+    </button>
   </form>
 </div>
