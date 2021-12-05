@@ -1,1 +1,26 @@
 <h1>{{ isEditMode ? 'Edit' : 'Create' }} customer</h1>
+
+<div style="border: 1px solid rgba(0, 0, 0, 0.1)" class="m-4 p-4">
+  <div *ngIf="loading"><strong>Loading....</strong></div>
+  <form #form="ngForm" *ngIf="!loading" (ngSubmit)="onSave()">
+    <div class="mb-3">
+      <label for="customer-name" class="form-label">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="customer-name"
+        [(ngModel)]="customer.name"
+        name="customer-name"
+      />
+    </div>
+    <button class="btn btn-primary" type="submit">
+      <span
+        *ngIf="isSaving"
+        class="spinner-border spinner-border-sm"
+        role="status"
+        aria-hidden="true"
+      ></span>
+      Save
+    </button>
+  </form>
+</div>

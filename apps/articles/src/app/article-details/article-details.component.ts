@@ -43,8 +43,8 @@ export class ArticleDetailsComponent implements OnInit {
 
   onSave(){
     this.isSaving = true;
-    this.articlesFacade.update(this.article)
-      .subscribe(() => this.router.navigate(['../', { relativeTo: this.activatedRoute}]));
+    const action = this.isEditMode ?  this.articlesFacade.update(this.article) : this.articlesFacade.create(this.article);
+    action.subscribe(() => this.router.navigate(['../', { relativeTo: this.activatedRoute}]));
   }
 
 }

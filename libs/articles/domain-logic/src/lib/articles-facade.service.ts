@@ -60,6 +60,17 @@ export class ArticlesFacadeService {
     });
   }
 
+  public create(article: Article) : Observable<void>{
+    return new Observable<void>((observer) =>{
+      const id = this.articles.length + 1;
+      article.id = id.toString();
+      this.articles.push(article);
+      setTimeout(() =>{
+        observer.next();
+        observer.complete();
+      }, 500)
+    });
+  }
 }
 
 export class Article{

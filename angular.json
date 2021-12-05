@@ -1,7 +1,4 @@
 {
-  "cli": {
-    "analytics": false
-  },
   "version": 1,
   "projects": {
     "articles": {
@@ -255,6 +252,48 @@
       },
       "tags": []
     },
+    "customers-domain-logic": {
+      "projectType": "library",
+      "root": "libs/customers/domain-logic",
+      "sourceRoot": "libs/customers/domain-logic/src",
+      "prefix": "angular-search",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:ng-packagr-lite",
+          "outputs": ["dist/libs/customers/domain-logic"],
+          "options": {
+            "project": "libs/customers/domain-logic/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/customers/domain-logic/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/customers/domain-logic/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/customers/domain-logic"],
+          "options": {
+            "jestConfig": "libs/customers/domain-logic/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/customers/domain-logic/src/**/*.ts",
+              "libs/customers/domain-logic/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "shared-search": {
       "projectType": "library",
       "root": "libs/shared/search",
@@ -402,12 +441,15 @@
         "serve-mfe": {
           "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": ["nx serve customers", "nx serve articles" , "nx serve shell"]
+            "commands": [
+              "nx serve customers",
+              "nx serve articles",
+              "nx serve shell"
+            ]
           }
         }
       },
       "tags": []
     }
-  },
-  "defaultProject": "shell"
+  }
 }

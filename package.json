@@ -8,7 +8,7 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
-    "serve-mfe" : "ng run shell:serve-mfe "
+    "serve-mfe": "ng run shell:serve-mfe "
   },
   "private": true,
   "dependencies": {

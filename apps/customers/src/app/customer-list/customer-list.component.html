@@ -1,1 +1,25 @@
-<h1>Customer list</h1>
+<h1>Customers List</h1>
+
+<div class="m-4 p-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  <strong *ngIf="loading">Loading....</strong>
+  <table *ngIf="!loading" class="table table-striped">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let customer of customers">
+        <td>{{ customer.id }}</td>
+        <td>{{ customer.name }}</td>
+        <td>
+          <button class="btn btn-secondary" routerLink="{{ customer.id }}">
+            Edit
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -18,4 +18,10 @@
     description="Some description"
     path="1"
   ></angular-search-search-item>
+  <angular-search-search-item
+    *ngIf="editCustomer"
+    [name]="editCustomer.name"
+    [description]="editCustomer.description"
+    [path]="editCustomer.path"
+  ></angular-search-search-item>
 </angular-search-search>
