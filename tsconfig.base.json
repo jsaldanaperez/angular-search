@@ -15,6 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@angular-search/articles/domain-logic": [
+        "libs/articles/domain-logic/src/index.ts"
+      ],
       "@angular-search/shared/search": ["libs/shared/search/src/index.ts"]
     }
   },

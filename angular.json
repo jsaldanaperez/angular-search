@@ -1,7 +1,4 @@
 {
-  "cli": {
-    "analytics": false
-  },
   "version": 1,
   "projects": {
     "articles": {
@@ -104,6 +101,48 @@
           "options": {
             "jestConfig": "apps/articles/jest.config.js",
             "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "articles-domain-logic": {
+      "projectType": "library",
+      "root": "libs/articles/domain-logic",
+      "sourceRoot": "libs/articles/domain-logic/src",
+      "prefix": "angular-search",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:ng-packagr-lite",
+          "outputs": ["dist/libs/articles/domain-logic"],
+          "options": {
+            "project": "libs/articles/domain-logic/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/articles/domain-logic/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/articles/domain-logic/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/articles/domain-logic"],
+          "options": {
+            "jestConfig": "libs/articles/domain-logic/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/articles/domain-logic/src/**/*.ts",
+              "libs/articles/domain-logic/src/**/*.html"
+            ]
           }
         }
       },

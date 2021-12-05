@@ -1,1 +1,18 @@
 <h1>{{ isEditMode ? 'Edit' : 'Create' }} article</h1>
+
+<div style="border: 1px solid rgba(0, 0, 0, 0.1)" class="m-4 p-4">
+  <div *ngIf="loading"><strong>Loading....</strong></div>
+  <form #form="ngForm" *ngIf="!loading" (ngSubmit)="onSave()">
+    <div class="mb-3">
+      <label for="article-name" class="form-label">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="article-name"
+        [(ngModel)]="article.name"
+        name="article-name"
+      />
+    </div>
+    <button class="btn btn-primary" type="submit">Save</button>
+  </form>
+</div>
