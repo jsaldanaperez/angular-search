@@ -252,34 +252,6 @@
       },
       "tags": []
     },
-    "customers-e2e": {
-      "root": "apps/customers-e2e",
-      "sourceRoot": "apps/customers-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/customers-e2e/cypress.json",
-            "devServerTarget": "customers:serve:development"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "customers:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
-          "options": {
-            "lintFilePatterns": ["apps/customers-e2e/**/*.{js,ts}"]
-          }
-        }
-      },
-      "tags": [],
-      "implicitDependencies": ["customers"]
-    },
     "shared-search": {
       "projectType": "library",
       "root": "libs/shared/search",
