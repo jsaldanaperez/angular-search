@@ -1,8 +1,16 @@
-<div class="card" (click)="onClick(value.path)">
+<div
+  #searchItem
+  [hidden]="!visible"
+  class="card"
+  (click)="onClick()"
+  (keydown)="onKeyDown($event)"
+  [tabIndex]="index"
+>
   <div class="card-body">
-    <strong class="card-title">{{ value.name }}</strong>
+    <strong class="card-title">{{ name }}</strong>
     <p class="card-text">
-      {{ value.description }}
+      <ng-content></ng-content>
+      {{ description }}
     </p>
   </div>
 </div>

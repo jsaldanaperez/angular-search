@@ -5,7 +5,6 @@ import { BehaviorSubject, Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class SearchService {
-  constructor(){ console.log('created')}
   private subject = new BehaviorSubject<string>('');
   private selectSubject = new Subject<{ domain: string, path: string}>();
   search$ = this.subject.asObservable();
