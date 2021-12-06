@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { LookUpService, SearchService } from '@angular-search/shared/search';
-import { CustomersFacadeService, Customer } from '@angular-search/customers/domain-logic';
+import { SearchConfig, SearchItem } from '@angular-search/shared/search';
+import { CustomersFacadeService } from '@angular-search/customers/domain-logic';
 
 @Component({
   selector: 'angular-search-customers',
@@ -8,33 +8,20 @@ import { CustomersFacadeService, Customer } from '@angular-search/customers/doma
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent{ 
- 
-  public editCustomer?: {
-    name: string,
-    description: string,
-    path: string
-  };
+  public editCustomer?: SearchItem;
+  constructor(private customersFacadeService: CustomersFacadeService){ }
 
-  constructor(
-    lookupService: LookUpService,
-    searchService: SearchService, 
-    customersFacadeService: CustomersFacadeService){
-      searchService.search$.subscribe((search) => {
-        if(search){
-          this.editCustomer = undefined;
-          lookupService.execute<Customer | undefined>(customersFacadeService.find(search))
-            .subscribe((customer) => {
-              if(customer){
-                this.editCustomer = {
-                  name: `Edit customer ${customer.name}`,
-                  description: 'Quick way to go to edit',
-                  path: customer.id
-                }
-              }
-            })
-        }else{
-          this.editCustomer = undefined;
+  public readonly editCustomerSearchConfig = SearchConfig.create({
+    onSearch: (search: string) => this.customersFacadeService.find(search),
+    onResult: (customer) => {
+      if(customer){
+        this.editCustomer = {
+          name: `Edit customer ${customer.name}`,
+          description: 'Quick way to go to edit',
+          path: customer.id
         }
-      });
-  }
+      }
+    },
+    onReset: () => this.editCustomer = undefined
+  })
 }

@@ -1,4 +1,7 @@
-<angular-search-search domain="customers">
+<angular-search-search
+  domain="customers"
+  [configs]="[editCustomerSearchConfig]"
+>
   <angular-search-search-item
     name="Customer list"
     description="Some description"
@@ -12,11 +15,6 @@
     name="Create customer"
     description="Some description"
     path="create"
-  ></angular-search-search-item>
-  <angular-search-search-item
-    name="Edit customer"
-    description="Some description"
-    path="1"
   ></angular-search-search-item>
   <angular-search-search-item
     *ngIf="editCustomer"
