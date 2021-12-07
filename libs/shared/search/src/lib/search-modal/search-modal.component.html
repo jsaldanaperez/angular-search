@@ -33,7 +33,7 @@
           />
         </div>
         <hr class="mb-0" />
-        <div class="results p-1 pt-0" *ngIf="showSearch">
+        <div #searchResults class="results p-1 pt-0" *ngIf="showSearch">
           <div *ngIf="lookup" class="d-flex justify-content-center p-2">
             <div class="spinner-border spinner-border-sm" role="status">
               <span class="visually-hidden">Loading...</span>
