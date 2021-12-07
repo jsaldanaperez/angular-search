@@ -16,9 +16,7 @@ export class TabIndexService {
 
   private indexCount = this.startIndex;
 
-  public get isOnLastIndex(): boolean{
-    console.log('currentIndex', this.currentIndex)
-    console.log('indexCount', this.indexCount)
+  public get isOnLastIndex(): boolean {
     return this.currentIndex === (this.indexCount - this.startIndex + 1);
   }
 
@@ -39,7 +37,6 @@ export class TabIndexService {
   }
 
   public increaseCurrentIndex(): void{
-    console.log('increate', this.currentIndex, this.indexCount)
     const count = this.currentIndex + 1;
     if(count < this.indexCount)
     this.currentIndex++;
