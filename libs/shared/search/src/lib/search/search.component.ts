@@ -41,7 +41,7 @@ export class SearchComponent<T> implements AfterContentInit {
   public ngAfterContentInit(): void{
 
     this.searchItems.forEach(searchItem => {
-      searchItem.indexValue = this.tabIndexService.getIndex();
+      searchItem.index = this.tabIndexService.getIndex();
       this.staticSearchItems.push(searchItem)
     });
 
@@ -51,7 +51,7 @@ export class SearchComponent<T> implements AfterContentInit {
     this.searchService.search$.subscribe(this.handleSearchChanges);
 
     this.tabIndexService.reset$.subscribe(()=>{
-      this.searchItems.filter(x => x.visible).forEach(searchItem => searchItem.indexValue = this.tabIndexService.getIndex())
+      this.searchItems.filter(x => x.visible).forEach(searchItem => searchItem.index = this.tabIndexService.getIndex())
     })
   }
 

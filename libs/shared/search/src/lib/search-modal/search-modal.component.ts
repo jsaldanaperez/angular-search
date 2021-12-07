@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { fromEvent, filter, interval, scan, takeWhile, tap } from 'rxjs';
 import { SearchService } from '../search.service';
 import { LookUpService } from '../look-up.service';
@@ -21,7 +21,6 @@ export class SearchModalComponent implements AfterViewInit {
   public lookup = false;
 
   constructor(
-    private changeDetectorRef: ChangeDetectorRef,
     private windowScrollingService: WindowScrollingService,
     private tabIndexService: TabIndexService,
     private lookupService: LookUpService,
@@ -56,6 +55,7 @@ export class SearchModalComponent implements AfterViewInit {
           this.hideNavigation();
         } 
         else if (event.key === 'ArrowUp'){
+          event.preventDefault();
           if(this.tabIndexService.currentIndex === this.tabIndexService.startIndex){
             this.scrollToTop(this.searchResults?.nativeElement);
             this.tabIndexService.setCurrentIndex(1);
@@ -65,11 +65,12 @@ export class SearchModalComponent implements AfterViewInit {
             this.tabIndexService.decreaseCurrentIndex();
           }
         }else if (event.key === 'ArrowDown'){
+          event.preventDefault();
+
           this.tabIndexService.increaseCurrentIndex();
-        }else if (event.key === 'Tab' && this.tabIndexService.isOnLastIndex){
-          event.stopPropagation();
+        }else if (event.key === 'Tab' && this.tabIndexService.isOnLastIndex && !event.shiftKey){
+          event.preventDefault();
         }
-        console.log(event.key === 'Tab', this.tabIndexService.isOnLastIndex)
       })
 
     fromEvent(window, 'click')
