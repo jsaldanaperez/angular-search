@@ -5,6 +5,7 @@ import { PathSelectionService } from '../path-selection.service';
 import { SearchService } from '../search.service';
 import { SearchConfig } from '../search-config';
 import { SearchItem } from '../search-item';
+import { debounceTime, distinctUntilChanged, of, Subject, switchMap } from 'rxjs';
 
 @Component({
   selector: 'angular-search-search',
@@ -18,6 +19,7 @@ export class SearchComponent implements AfterContentInit {
   @Input() public configs?: SearchConfig<any>[]
   @ContentChildren(SearchItemComponent) private  searchItems!: QueryList<SearchItemComponent>;
   private staticSearchItems: SearchItem[] = [];
+  private searchSubject = new Subject<string>();
 
   constructor(
     private lookUpService: LookUpService,
@@ -29,18 +31,33 @@ export class SearchComponent implements AfterContentInit {
   }
 
   public ngAfterContentInit(): void{
+    const observable = this.searchSubject
+    .pipe(debounceTime(300))
+    .pipe(distinctUntilChanged())
+    .pipe(switchMap((term) => {
+      return of(term);
+    }));
+
+    observable.subscribe((term: string) => this.triggerConfigurations(term));
+
     this.searchItems.forEach(searchItem => this.staticSearchItems.push(searchItem));
     this.searchService.search$.subscribe((value) =>{
+
+      this.searchSubject.next(value);
+
       this.searchItems
         .filter(x => this.staticSearchItems.includes(x))
         .forEach(item => item.visible = item.name.toLocaleLowerCase().includes(value.toLocaleLowerCase()));
 
       if(this.configs){
         this.configs.forEach(x => x.onReset())
-        if(value){
-          this.configs.forEach(x => this.lookUpService.execute(x.onSearch(value)).subscribe(result => x.onResult(result)))
-        }
       }
     });
+  }
+
+  private triggerConfigurations(value: string): void{
+    if(value && this.configs){
+      this.configs.forEach(x => this.lookUpService.execute(x.onSearch(value)).subscribe(result => x.onResult(result)))
+    }
   }
 }

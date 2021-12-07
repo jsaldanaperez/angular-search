@@ -8,9 +8,7 @@ import { ArticlesFacadeService } from '@angular-search/articles/domain-logic';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent{  
-
   public editArticle?: SearchItem;
-  public editArticle1?: SearchItem;
 
   constructor(private articlesFacadeService: ArticlesFacadeService){ }
 
