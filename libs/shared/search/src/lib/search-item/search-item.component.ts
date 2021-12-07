@@ -54,4 +54,8 @@ export class SearchItemComponent implements AfterViewInit {
         this.onClick();
       }
     }
+
+    public onMouseEnter(): void{
+      this.searchItem.nativeElement.focus();
+    }
 }
