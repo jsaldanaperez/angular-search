@@ -6,7 +6,8 @@ import { Subject } from 'rxjs';
 })
 export class TabIndexService {
   public startIndex = 2;
-  public currentIndex = 1;
+  public minIndex = 0;
+  public currentIndex!: number;
 
   private currentIndexSubject = new Subject<number>();
   public currentIndex$ = this.currentIndexSubject.asObservable();
@@ -15,13 +16,11 @@ export class TabIndexService {
   public reset$ = this.resetSubject.asObservable();
 
   private indexCount = this.startIndex;
-
-  public get isOnLastIndex(): boolean {
-    return this.currentIndex === (this.indexCount - this.startIndex + 1);
-  }
+  private lastIndex = 0;
 
   public getIndex(): number{
     const index = this.indexCount;
+    this.lastIndex = index;
     this.indexCount++;
     return index;
   }
@@ -37,14 +36,13 @@ export class TabIndexService {
   }
 
   public increaseCurrentIndex(): void{
-    const count = this.currentIndex + 1;
-    if(count < this.indexCount)
+    if(this.currentIndex < this.lastIndex)
     this.currentIndex++;
     this.currentIndexSubject.next(this.currentIndex);
   }
 
   public decreaseCurrentIndex(): void{
-    if(this.currentIndex > this.startIndex){
+    if(this.currentIndex > this.minIndex){
       this.currentIndex--;
       this.currentIndexSubject.next(this.currentIndex);
     }

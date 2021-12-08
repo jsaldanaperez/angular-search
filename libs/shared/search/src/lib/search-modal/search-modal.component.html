@@ -28,6 +28,7 @@
             [(ngModel)]="searchValue"
             [ngModelOptions]="{ standalone: true }"
             (ngModelChange)="onSearch()"
+            (focus)="onSearchFocus()"
             class="form-control"
             placeholder="Search actions"
           />

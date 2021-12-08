@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
-import { fromEvent, filter, interval, scan, takeWhile, tap } from 'rxjs';
+import { fromEvent, filter, merge } from 'rxjs';
 import { SearchService } from '../search.service';
 import { LookUpService } from '../look-up.service';
 import { TabIndexService } from '../tab-index.service';
@@ -14,11 +14,13 @@ export class SearchModalComponent implements AfterViewInit {
   @ViewChild('modal', { static: true}) modal!:ElementRef;
   @ViewChild('modalContent', { static: true}) modalContent!:ElementRef;
   @ViewChild('searchControl', { static: true}) searchControlElement!: ElementRef<HTMLInputElement>;
-  @ViewChild('closeButton', { static: true}) closeButton!: ElementRef;
-  @ViewChild('searchResults', { static: false}) searchResults?: ElementRef;
-  showSearch = false;
-  searchValue = '';
+  @ViewChild('closeButton', { static: true}) closeButtonElement!: ElementRef;
+  public showSearch = false;
+  public searchValue = '';
   public lookup = false;
+
+  private closeButtonIndex = 0;
+  private searchControlIndex = 1;
 
   constructor(
     private windowScrollingService: WindowScrollingService,
@@ -29,12 +31,21 @@ export class SearchModalComponent implements AfterViewInit {
   }
 
   public ngAfterViewInit(): void{
-    this.subscribeToEvents();
-    this.searchService.selected$.subscribe(() =>this.hideNavigation());
+    this.subscribeToActivateEvent();
+    this.subscribeToNavigationEvents();
+    this.subscribeToCloseEvents();
     this.lookupService.lookup$.subscribe((lookup) => this.lookup = lookup);
   }
 
-  private subscribeToEvents(): void{
+  public onSearch(): void{
+    this.searchService.search(this.searchValue);
+  }
+
+  public onSearchFocus(): void{
+    this.tabIndexService.setCurrentIndex(this.searchControlIndex);
+  }
+
+  private subscribeToActivateEvent(): void{
     fromEvent<KeyboardEvent>(window, 'keydown')
       .pipe(filter(() => !this.showSearch))
       .subscribe((event) =>{ 
@@ -43,66 +54,72 @@ export class SearchModalComponent implements AfterViewInit {
           this.renderer.setStyle(this.modal.nativeElement, 'display', 'block');
           setTimeout(() => {
             this.showSearch = true;
-            this.searchControlElement.nativeElement.focus();
+            this.focus(this.searchControlElement);
           })
         }
-      })
-
-      fromEvent<KeyboardEvent>(window, 'keydown')
-      .pipe(filter(() => this.showSearch))
-      .subscribe((event) =>{ 
-        if (event.key === 'Escape'){
-          this.hideNavigation();
-        } 
-        else if (event.key === 'ArrowUp'){
-          event.preventDefault();
-          if(this.tabIndexService.currentIndex === this.tabIndexService.startIndex){
-            this.scrollToTop(this.searchResults?.nativeElement);
-            this.tabIndexService.setCurrentIndex(1);
-            this.searchControlElement.nativeElement.focus();
-            setTimeout(() => this.searchControlElement.nativeElement.select());
-          }else{
-            this.tabIndexService.decreaseCurrentIndex();
-          }
-        }else if (event.key === 'ArrowDown'){
-          event.preventDefault();
-
-          this.tabIndexService.increaseCurrentIndex();
-        }else if (event.key === 'Tab' && this.tabIndexService.isOnLastIndex && !event.shiftKey){
-          event.preventDefault();
-        }
-      })
-
-    fromEvent(window, 'click')
-      .pipe(filter((event) => this.showSearch && !event.composedPath().includes(this.modalContent.nativeElement)))
-      .subscribe(() => this.hideNavigation())
-
-    fromEvent(this.closeButton.nativeElement, 'click')
-      .subscribe(() => this.hideNavigation())
+      });
   }
 
-  private hideNavigation(): void{
+  private subscribeToNavigationEvents(): void{
+
+      fromEvent<KeyboardEvent>(window, 'keydown')
+        .pipe(filter(() => this.showSearch))
+        .subscribe((event) => {
+
+        const increase = () => {
+          event.preventDefault();
+          this.tabIndexService.increaseCurrentIndex()
+        };
+
+        const decrease = () => {
+          event.preventDefault();
+          this.tabIndexService.decreaseCurrentIndex()
+        };
+
+        switch(event.key){
+          case 'Escape': this.hideNavigation(); break;
+          case 'ArrowUp': decrease(); break;
+          case 'ArrowDown': increase(); break;
+          case 'Tab': event.shiftKey ? decrease() : increase(); break;
+        }
+      });
+
+      this.tabIndexService.currentIndex$
+      .subscribe((index) => {
+        switch(index){
+          case this.closeButtonIndex: this.focus(this.closeButtonElement); break;
+          case this.searchControlIndex: 
+            this.focus(this.searchControlElement);
+            setTimeout(() => this.searchControlElement.nativeElement.select());
+            break;
+        }
+      });
+  }
+
+  private focus(element: ElementRef): void{
+    element.nativeElement.focus();
+  }
+
+  private subscribeToCloseEvents(): void{
+    const clickOutsideOfModalObservable =  fromEvent(window, 'click')
+      .pipe(filter((event) => this.showSearch && !event.composedPath().includes(this.modalContent.nativeElement)));
+    const closeButtonClickObservale =  fromEvent(this.closeButtonElement.nativeElement, 'click');
+    const onItemSelectedObservable = this.searchService.selected$;
+
+    merge(
+      clickOutsideOfModalObservable, 
+      closeButtonClickObservale, 
+      onItemSelectedObservable)
+    .subscribe(this.hideNavigation);
+  }
+
+  private hideNavigation = () => {
     this.showSearch = false;
     this.windowScrollingService.enable();
-    this.tabIndexService.setCurrentIndex(1);
     setTimeout(() => {
       this.renderer.setStyle(this.modal.nativeElement, 'display', 'none')
       this.searchValue = '';
       this.searchService.search(this.searchValue)
     }, 200);
-  }
-
-  onSearch(): void{
-    this.searchService.search(this.searchValue);
-  }
-
-  private scrollToTop(nativeElement: HTMLElement): void {
-    const duration = 100;
-    const intervalValue = 5;
-    const move = nativeElement.scrollTop * intervalValue / duration;
-    interval(intervalValue).pipe(
-      scan((acc) => acc - move, nativeElement.scrollTop),
-      tap(position => nativeElement.scrollTop = position),
-      takeWhile(val => val > 0)).subscribe();
   }
 }

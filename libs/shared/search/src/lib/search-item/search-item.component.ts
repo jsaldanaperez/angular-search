@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, ContentChild, ElementRef, Input, TemplateRef, ViewChild } from '@angular/core';
-import { filter, fromEvent } from 'rxjs';
+import { AfterViewInit, Component, ContentChild, ElementRef, Input, OnDestroy, TemplateRef, ViewChild } from '@angular/core';
+import { filter, fromEvent, Subject, takeUntil } from 'rxjs';
 import { PathSelectionService } from '../path-selection.service';
 import { TabIndexService } from '../tab-index.service';
 
@@ -8,7 +8,7 @@ import { TabIndexService } from '../tab-index.service';
   templateUrl: './search-item.component.html',
   styleUrls: ['./search-item.component.scss']
 })
-export class SearchItemComponent implements AfterViewInit {
+export class SearchItemComponent implements AfterViewInit, OnDestroy {
   @Input() name!: string;
   @Input() description!: string;
   @Input() path!: string;
@@ -23,6 +23,7 @@ export class SearchItemComponent implements AfterViewInit {
   public visible = true;
   public indexValue = 0;
   public focused = false;
+  private unsubscribe$ = new Subject();
   onClick = ()  => this.pathSelectionService.setPath(this.path);
 
   constructor(
@@ -30,7 +31,11 @@ export class SearchItemComponent implements AfterViewInit {
     private pathSelectionService: PathSelectionService){ }
 
     public ngAfterViewInit(): void{
-      fromEvent(this.searchItem.nativeElement, 'focus') 
+      fromEvent(this.searchItem.nativeElement, 'focus')
+        .pipe(
+          filter(() => this.visible),
+          takeUntil(this.unsubscribe$)
+        )
         .subscribe(() => {
           if(!this.focused){
             this.tabIndexService.setCurrentIndex(this.indexValue);
@@ -38,11 +43,19 @@ export class SearchItemComponent implements AfterViewInit {
           }
         });
 
-        fromEvent(this.searchItem.nativeElement, 'blur')
+      fromEvent(this.searchItem.nativeElement, 'blur')
+      .pipe(
+        filter(() => this.visible),
+        takeUntil(this.unsubscribe$)
+      )
         .subscribe(() => this.focused = false);
 
       this.tabIndexService.currentIndex$
-        .pipe(filter((index) => this.indexValue === index && !this.focused))
+        .pipe(
+          filter(() => this.visible),
+          filter((index) => this.indexValue === index && !this.focused),
+          takeUntil(this.unsubscribe$)
+        )
         .subscribe(() => {
           this.focused = true;
           this.searchItem.nativeElement.focus();
@@ -55,7 +68,12 @@ export class SearchItemComponent implements AfterViewInit {
       }
     }
 
-    public onMouseEnter(): void{
+    public onMouseMove(): void{
       this.searchItem.nativeElement.focus();
+    }
+
+    public ngOnDestroy(): void{
+      this.unsubscribe$.next(true);
+      this.unsubscribe$.complete();
     }
 }
