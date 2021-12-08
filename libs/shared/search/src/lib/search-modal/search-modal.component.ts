@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
-import { fromEvent, filter, merge } from 'rxjs';
+import { fromEvent, filter, merge, Observable } from 'rxjs';
 import { SearchService } from '../search.service';
 import { LookUpService } from '../look-up.service';
 import { TabIndexService } from '../tab-index.service';
@@ -17,7 +17,7 @@ export class SearchModalComponent implements AfterViewInit {
   @ViewChild('closeButton', { static: true}) closeButtonElement!: ElementRef;
   public showSearch = false;
   public searchValue = '';
-  public lookup = false;
+  public lookup$!: Observable<boolean>;
 
   private closeButtonIndex = 0;
   private searchControlIndex = 1;
@@ -34,7 +34,7 @@ export class SearchModalComponent implements AfterViewInit {
     this.subscribeToActivateEvent();
     this.subscribeToNavigationEvents();
     this.subscribeToCloseEvents();
-    this.lookupService.lookup$.subscribe((lookup) => this.lookup = lookup);
+    this.lookup$ = this.lookupService.lookup$;
   }
 
   public onSearch(): void{
