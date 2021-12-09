@@ -17,7 +17,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
       [
         { path: '', component: DashboardComponent},
         { path: '', loadChildren: () => import('articles/SearchModule').then((m) => m.SearchModule), outlet: 'articles'},
-        { path: '', loadChildren: () => import('customers/SearchModule').then((m) => m.SearchModule), outlet: 'customers'},
+        // { path: '', loadChildren: () => import('customers/SearchModule').then((m) => m.SearchModule), outlet: 'customers'},
         {
           path: 'articles',
           loadChildren: () =>

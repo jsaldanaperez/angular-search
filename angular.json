@@ -1,4 +1,7 @@
 {
+  "cli": {
+    "analytics": false
+  },
   "version": 1,
   "projects": {
     "articles": {
@@ -451,5 +454,6 @@
       },
       "tags": []
     }
-  }
+  },
+  "defaultProject": "shell"
 }
