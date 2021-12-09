@@ -1,15 +1,17 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SearchService } from '../search.service';
 import { LookUpService } from '../look-up.service';
 import { SearchModalEventsService } from './search-modal-events.service';
+import { KeyAssignmentService } from '../key-assignment.service';
+import { TabIndexService } from '../tab-index.service';
 
 @Component({
   selector: 'angular-search-search-modal',
   templateUrl: './search-modal.component.html',
   styleUrls: ['./search-modal.component.scss'],
 })
-export class SearchModalComponent<T> implements AfterViewInit {
+export class SearchModalComponent<T> implements OnInit, AfterViewInit {
   @ViewChild('modal', { static: true}) modal!:ElementRef;
   @ViewChild('modalContent', { static: true}) modalContent!:ElementRef;
   @ViewChild('searchControl', { static: true}) searchControlElement!: ElementRef<HTMLInputElement>;
@@ -22,7 +24,15 @@ export class SearchModalComponent<T> implements AfterViewInit {
   constructor(
     private lookupService: LookUpService,
     private searchService: SearchService,
+    private tabIndexService: TabIndexService,
+    private keyAssignmentService: KeyAssignmentService,
     private searchModalEventsService: SearchModalEventsService){
+  }
+
+  public ngOnInit(): void{
+    this.tabIndexService.reset$.subscribe(() =>{
+      this.keyAssignmentService.reset();
+    });
   }
 
   public ngAfterViewInit(): void{
@@ -33,6 +43,7 @@ export class SearchModalComponent<T> implements AfterViewInit {
       searchControl: this.searchControlElement,
       closeButton: this.closeButtonElement
     });
+
     this.searchModalEventsService.showSearch$.subscribe((show) =>{
       this.showSearch = show;
       this.searchValue = '';

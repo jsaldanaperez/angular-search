@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { KeyAssignmentService } from './key-assignment.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +18,6 @@ export class TabIndexService {
   private indexCount = this.startIndex;
   private lastIndex = 0;
 
-  constructor(private keyAssignmentService: KeyAssignmentService){ }
 
   public getIndex(): number{
     const index = this.indexCount;
@@ -30,7 +28,6 @@ export class TabIndexService {
   }
 
   public reset(): void{
-    this.keyAssignmentService.reset();
     this.indexCount = this.startIndex;
     this.resetSubject.next(true);
   }
