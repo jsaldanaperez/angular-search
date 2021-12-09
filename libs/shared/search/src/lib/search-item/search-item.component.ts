@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, ContentChild, ElementRef, Input, OnDestroy, TemplateRef, ViewChild } from '@angular/core';
 import { filter, fromEvent, Subject, takeUntil } from 'rxjs';
+import { KeyAssignmentService } from '../key-assignment.service';
 import { PathSelectionService } from '../path-selection.service';
+import { SearchModalEventsService } from '../search-modal/search-modal-events.service';
 import { TabIndexService } from '../tab-index.service';
 
 @Component({
@@ -17,11 +19,15 @@ export class SearchItemComponent implements AfterViewInit, OnDestroy {
   public index!: number;
   public visible = true;
   public focused = false;
+  public key!: string;
+  private showSearch = false;
   private unsubscribe$ = new Subject();
   onClick = ()  => this.pathSelectionService.setPath(this.path);
 
   constructor(
     private tabIndexService: TabIndexService,
+    private searchModalEventsService: SearchModalEventsService,
+    private keyAssignmentService: KeyAssignmentService,
     private pathSelectionService: PathSelectionService){ }
 
     public ngAfterViewInit(): void{
@@ -54,6 +60,17 @@ export class SearchItemComponent implements AfterViewInit, OnDestroy {
           this.focused = true;
           this.searchItem.nativeElement.focus();
         });
+
+      this.keyAssignmentService.selectedKey$
+        .pipe(
+          filter((key) => this.visible && key === this.key && this.showSearch),
+          takeUntil(this.unsubscribe$)
+        )
+        .subscribe(() => this.onClick());
+
+      this.searchModalEventsService.showSearch$
+          .pipe(takeUntil(this.unsubscribe$))
+          .subscribe((show) => this.showSearch = show);
     }
 
     public onKeyDown(event: KeyboardEvent): void{

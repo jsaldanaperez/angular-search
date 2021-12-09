@@ -7,6 +7,7 @@ import { SearchConfig } from '../search-config';
 import { SearchItem } from '../search-item';
 import { debounceTime, distinctUntilChanged, of, Subject, switchMap } from 'rxjs';
 import { TabIndexService } from '../tab-index.service';
+import { KeyAssignmentService } from '../key-assignment.service';
 
 @Component({
   selector: 'angular-search-search',
@@ -17,7 +18,7 @@ import { TabIndexService } from '../tab-index.service';
 export class SearchComponent<T> implements AfterContentInit {
   @Input() public domain!: string; 
   @Input() public configs?: SearchConfig<T>[]
-  @ContentChildren(SearchItemComponent) private  searchItems!: QueryList<SearchItemComponent>;
+  @ContentChildren(SearchItemComponent) public  searchItems!: QueryList<SearchItemComponent>;
   private staticSearchItems: SearchItem[] = [];
   private searchSubject = new Subject<string>();
   private searchValue$ = this.searchSubject
@@ -28,6 +29,7 @@ export class SearchComponent<T> implements AfterContentInit {
   }));
 
   constructor(
+    private keyAssignmentService: KeyAssignmentService,
     private tabIndexService: TabIndexService,
     private lookUpService: LookUpService,
     private searchService: SearchService,
@@ -41,7 +43,7 @@ export class SearchComponent<T> implements AfterContentInit {
   public ngAfterContentInit(): void{
 
     this.searchItems.forEach(searchItem => {
-      searchItem.index = this.tabIndexService.getIndex();
+      this.setValues(searchItem);
       this.staticSearchItems.push(searchItem)
     });
 
@@ -52,7 +54,7 @@ export class SearchComponent<T> implements AfterContentInit {
 
     this.tabIndexService.reset$.subscribe(()=>{
       this.searchItems.filter(x => x.visible).forEach(searchItem => {
-        searchItem.index = this.tabIndexService.getIndex();
+        this.setValues(searchItem);
         if(searchItem.focused){
           this.tabIndexService.currentIndex = searchItem.index;
         }
@@ -88,5 +90,10 @@ export class SearchComponent<T> implements AfterContentInit {
       if(hasChangedVisibility){
         this.tabIndexService.reset();
       }
+  }
+
+  private setValues(component: SearchItemComponent): void{
+    component.index = this.tabIndexService.getIndex();
+    component.key = this.keyAssignmentService.get();
   }
 }
