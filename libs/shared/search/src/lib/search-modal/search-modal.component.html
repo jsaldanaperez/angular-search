@@ -10,18 +10,21 @@
 >
   <div class="modal-dialog">
     <div #modalContent class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header"> 
         <strong class="modal-title" id="exampleModalLiveLabel">Search</strong>
+        <div *ngIf="lookup$ | async" class="spinner-border spinner-border-sm" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
         <button
           #closeButton
           type="button"
           class="btn-close"
           (click)="closeButton.blur()"
           aria-label="Close"
-        ></button>
+        ></button> 
       </div>
-      <div class="modal-body p-0" [class.lookup]="lookup">
-        <div class="p-3">
+      <div class="modal-body p-0">
+        <div class="p-3 flex">
           <input
             tabindex="1"
             #searchControl
@@ -32,14 +35,10 @@
             class="form-control"
             placeholder="Search actions"
           />
+         
         </div>
         <hr class="mb-0" />
         <div #searchResults class="results p-1 pt-0" *ngIf="showSearch">
-          <div *ngIf="lookup" class="d-flex justify-content-center p-2">
-            <div class="spinner-border spinner-border-sm" role="status">
-              <span class="visually-hidden">Loading...</span>
-            </div>
-          </div>
           <ng-content></ng-content>
         </div>
       </div>

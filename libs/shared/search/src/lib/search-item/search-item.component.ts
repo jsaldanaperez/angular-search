@@ -14,14 +14,8 @@ export class SearchItemComponent implements AfterViewInit, OnDestroy {
   @Input() path!: string;
   @ViewChild('searchItem', { static: true}) searchItem!: ElementRef;
   @ContentChild(TemplateRef) template?: TemplateRef<unknown>;
-  public set index(value: number) {
-    this.indexValue = value;
-    if(this.focused){
-      this.tabIndexService.currentIndex = value;
-    }
-  }
+  public index!: number;
   public visible = true;
-  public indexValue = 0;
   public focused = false;
   private unsubscribe$ = new Subject();
   onClick = ()  => this.pathSelectionService.setPath(this.path);
@@ -38,7 +32,7 @@ export class SearchItemComponent implements AfterViewInit, OnDestroy {
         )
         .subscribe(() => {
           if(!this.focused){
-            this.tabIndexService.setCurrentIndex(this.indexValue);
+            this.tabIndexService.setCurrentIndex(this.index);
             this.focused = true;
           }
         });
@@ -53,7 +47,7 @@ export class SearchItemComponent implements AfterViewInit, OnDestroy {
       this.tabIndexService.currentIndex$
         .pipe(
           filter(() => this.visible),
-          filter((index) => this.indexValue === index && !this.focused),
+          filter((index) => this.index === index && !this.focused),
           takeUntil(this.unsubscribe$)
         )
         .subscribe(() => {

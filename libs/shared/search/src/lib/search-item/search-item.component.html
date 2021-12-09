@@ -4,11 +4,11 @@
   class="card"
   (click)="onClick()"
   (keydown)="onKeyDown($event)"
-  [tabIndex]="indexValue"
+  [tabIndex]="index"
   (mousemove)="onMouseMove()"
 >
   <div class="card-body">
-    <strong class="card-title">{{ name }} - {{ indexValue }}</strong>
+    <strong class="card-title">{{ name }} - {{ index }}</strong>
     <p class="card-text">
       <ng-content></ng-content>
       {{ description }}

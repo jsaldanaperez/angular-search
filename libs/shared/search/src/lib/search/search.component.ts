@@ -51,7 +51,12 @@ export class SearchComponent<T> implements AfterContentInit {
     this.searchService.search$.subscribe(this.handleSearchChanges);
 
     this.tabIndexService.reset$.subscribe(()=>{
-      this.searchItems.filter(x => x.visible).forEach(searchItem => searchItem.index = this.tabIndexService.getIndex())
+      this.searchItems.filter(x => x.visible).forEach(searchItem => {
+        searchItem.index = this.tabIndexService.getIndex();
+        if(searchItem.focused){
+          this.tabIndexService.currentIndex = searchItem.index;
+        }
+      })
     })
   }
 
