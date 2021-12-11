@@ -15,9 +15,19 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     SharedSearchModule,
     RouterModule.forRoot(
       [
-        { path: '', component: DashboardComponent},
-        { path: '', loadChildren: () => import('articles/SearchModule').then((m) => m.SearchModule), outlet: 'articles'},
-        { path: '', loadChildren: () => import('customers/SearchModule').then((m) => m.SearchModule), outlet: 'customers'},
+        { path: '', component: DashboardComponent },
+        {
+          path: '',
+          loadChildren: () =>
+            import('articles/SearchModule').then((m) => m.SearchModule),
+          outlet: 'articles',
+        },
+        {
+          path: '',
+          loadChildren: () =>
+            import('customers/SearchModule').then((m) => m.SearchModule),
+          outlet: 'customers',
+        },
         {
           path: 'articles',
           loadChildren: () =>
@@ -28,7 +38,14 @@ import { DashboardComponent } from './dashboard/dashboard.component';
         {
           path: 'customers',
           loadChildren: () =>
-            import('customers/RemoteEntryModule').then((m) => m.RemoteEntryModule),
+            import('customers/RemoteEntryModule').then(
+              (m) => m.RemoteEntryModule
+            ),
+        },
+        {
+          path: 'invoices',
+          loadChildren: () =>
+            import('invoices/Module').then((m) => m.RemoteEntryModule),
         },
       ],
       { initialNavigation: 'enabledBlocking' }
