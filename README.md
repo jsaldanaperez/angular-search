@@ -9,4 +9,4 @@ Static and dynamic search results from different micro frontends bundled into on
 
 
 ## Try it out
-See working <a href="https://polite-sea-0ef513703.azurestaticapps.net" target="_blank">demo</a>.
+See working <a href="https://polite-sea-0ef513703.azurestaticapps.net">demo</a>.
