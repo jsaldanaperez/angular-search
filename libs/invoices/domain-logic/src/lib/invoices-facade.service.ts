@@ -7,15 +7,15 @@ import { Observable } from 'rxjs';
 export class InvoicesFacadeService {
   
   private invoices: Invoice[] = [
-    { id: '1', invoiceNumber: 'Invoice1', amount: 100},
-    { id: '2', invoiceNumber: 'Invoice2',  amount: 100},
-    { id: '3', invoiceNumber: 'Invoice3', amount: 100},
-    { id: '4', invoiceNumber: 'Invoice4', amount: 100},
-    { id: '5', invoiceNumber: 'Invoice5', amount: 100},
-    { id: '6', invoiceNumber: 'Invoice6', amount: 100},
-    { id: '7', invoiceNumber: 'Invoice7', amount: 100},
-    { id: '8', invoiceNumber: 'Invoice8', amount: 100},
-    { id: '9', invoiceNumber: 'Invoice9', amount: 100}
+    { id: '1', invoiceNumber: 'Invoice1', amount: 100, customerId: '1'},
+    { id: '2', invoiceNumber: 'Invoice2',  amount: 100, customerId: '2'},
+    { id: '3', invoiceNumber: 'Invoice3', amount: 100, customerId: '3'},
+    { id: '4', invoiceNumber: 'Invoice4', amount: 100, customerId: '4'},
+    { id: '5', invoiceNumber: 'Invoice5', amount: 100, customerId: '5'},
+    { id: '6', invoiceNumber: 'Invoice6', amount: 100, customerId: '6'},
+    { id: '7', invoiceNumber: 'Invoice7', amount: 100, customerId: '7'},
+    { id: '8', invoiceNumber: 'Invoice8', amount: 100, customerId: '8'},
+    { id: '9', invoiceNumber: 'Invoice9', amount: 100, customerId: '9'}
   ];
   
   public search(): Observable<Invoice[]>{
@@ -77,4 +77,5 @@ export class Invoice{
   id!: string;
   invoiceNumber!: string;
   amount!: number;
+  customerId!: string;
 }

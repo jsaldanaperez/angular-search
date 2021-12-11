@@ -4,14 +4,32 @@
   <div *ngIf="loading"><strong>Loading....</strong></div>
   <form #form="ngForm" *ngIf="!loading" (ngSubmit)="onSave()">
     <div class="mb-3">
-      <label for="invoice-name" class="form-label">Number</label>
+      <label for="customer" class="form-label">Customer</label>
+      <select
+        class="form-select"
+        name="customer"
+        #custom="ngModel"
+        [(ngModel)]="invoice.customerId"
+        required
+      >
+        <option
+          *ngFor="let customer of customers$ | async"
+          [ngValue]="customer.id"
+        >
+          {{ customer.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="invoice-number" class="form-label">Number</label>
       <input
         required
         type="text"
         class="form-control"
-        id="invoice-name"
+        id="invoice-number"
         [(ngModel)]="invoice.invoiceNumber"
-        name="invoice-name"
+        name="invoice-number"
       />
     </div>
     <div class="mb-3">
