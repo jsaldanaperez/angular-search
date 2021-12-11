@@ -20,7 +20,7 @@ const sharedMappings = new mf.SharedMappings();
 sharedMappings.register(
   tsConfigPath,
   [
-    /* mapped paths to share */
+    "@angular-search/shared/search"
   ],
   workspaceRootPath
 );
@@ -29,6 +29,7 @@ module.exports = {
   output: {
     uniqueName: 'invoices',
     publicPath: 'auto',
+    scriptType: 'text/javascript'
   },
   optimization: {
     runtimeChunk: false,
@@ -45,12 +46,14 @@ module.exports = {
       filename: 'remoteEntry.js',
       exposes: {
         './Module': 'apps/invoices/src/app/remote-entry/entry.module.ts',
+        './SearchModule' : 'apps/invoices/src/app/search/search.module.ts'
       },
       shared: {
-        '@angular/core': { singleton: true, strictVersion: true },
-        '@angular/common': { singleton: true, strictVersion: true },
-        '@angular/common/http': { singleton: true, strictVersion: true },
-        '@angular/router': { singleton: true, strictVersion: true },
+        '@angular/core': { singleton: true, strictVersion: true, requiredVersion: '^13.0.0' },
+        '@angular/common': { singleton: true, strictVersion: true, requiredVersion: '^13.0.0' },
+        '@angular/common/http': { singleton: true, strictVersion: true, requiredVersion: '^13.0.0' },
+        '@angular/router': { singleton: true, strictVersion: true, requiredVersion: '^13.0.0' },
+        '@angular/forms': { singleton: true, strictVersion: true, requiredVersion: '^13.0.0' },
         ...sharedMappings.getDescriptors(),
       },
     }),

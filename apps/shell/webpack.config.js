@@ -27,7 +27,7 @@ module.exports = {
   output: {
     uniqueName: 'shell',
     publicPath: 'auto',
-    scriptType: 'text/javascript',
+    scriptType: 'text/javascript'
   },
   optimization: {
     runtimeChunk: false,
@@ -44,7 +44,7 @@ module.exports = {
       remotes: {
         articles: 'articles@http://localhost:4201/remoteEntry.js',
         customers: 'customers@http://localhost:4202/remoteEntry.js',
-        invoices: 'invoices@http://localhost:4200/remoteEntry.js',
+        invoices: 'invoices@http://localhost:4203/remoteEntry.js',
       },
       shared: {
         '@angular/core': {

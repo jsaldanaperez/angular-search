@@ -29,6 +29,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
           outlet: 'customers',
         },
         {
+          path: '',
+          loadChildren: () =>
+            import('invoices/SearchModule').then((m) => m.SearchModule),
+          outlet: 'invoices',
+        },
+        {
           path: 'articles',
           loadChildren: () =>
             import('articles/RemoteEntryModule').then(
