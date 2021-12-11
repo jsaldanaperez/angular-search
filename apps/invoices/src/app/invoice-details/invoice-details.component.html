@@ -1,0 +1,39 @@
+<h1>{{ isEditMode ? 'Edit' : 'Create' }} invoice</h1>
+
+<div style="border: 1px solid rgba(0, 0, 0, 0.1)" class="m-4 p-4">
+  <div *ngIf="loading"><strong>Loading....</strong></div>
+  <form #form="ngForm" *ngIf="!loading" (ngSubmit)="onSave()">
+    <div class="mb-3">
+      <label for="invoice-name" class="form-label">Number</label>
+      <input
+        required
+        type="text"
+        class="form-control"
+        id="invoice-name"
+        [(ngModel)]="invoice.invoiceNumber"
+        name="invoice-name"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="invoice-amount" class="form-label">Amount</label>
+      <input
+        required
+        type="number"
+        class="form-control"
+        id="invoice-amount"
+        min="1"
+        [(ngModel)]="invoice.amount"
+        name="invoice-name"
+      />
+    </div>
+    <button [disabled]="form.invalid" class="btn btn-primary" type="submit">
+      <span
+        *ngIf="isSaving"
+        class="spinner-border spinner-border-sm"
+        role="status"
+        aria-hidden="true"
+      ></span>
+      Save
+    </button>
+  </form>
+</div>
