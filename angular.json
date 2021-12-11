@@ -252,48 +252,6 @@
       },
       "tags": []
     },
-    "customers-api": {
-      "projectType": "library",
-      "root": "libs/customers/api",
-      "sourceRoot": "libs/customers/api/src",
-      "prefix": "angular-search",
-      "architect": {
-        "build": {
-          "builder": "@nrwl/angular:ng-packagr-lite",
-          "outputs": ["dist/libs/customers/api"],
-          "options": {
-            "project": "libs/customers/api/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "libs/customers/api/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "libs/customers/api/tsconfig.lib.json"
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/customers/api"],
-          "options": {
-            "jestConfig": "libs/customers/api/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/customers/api/src/**/*.ts",
-              "libs/customers/api/src/**/*.html"
-            ]
-          }
-        }
-      },
-      "tags": []
-    },
     "customers-domain-logic": {
       "projectType": "library",
       "root": "libs/customers/domain-logic",
