@@ -18,6 +18,7 @@
       "@angular-search/articles/domain-logic": [
         "libs/articles/domain-logic/src/index.ts"
       ],
+      "@angular-search/customers/api": ["libs/customers/api/src/index.ts"],
       "@angular-search/customers/domain-logic": [
         "libs/customers/domain-logic/src/index.ts"
       ],
