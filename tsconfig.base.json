@@ -21,6 +21,9 @@
       "@angular-search/customers/domain-logic": [
         "libs/customers/domain-logic/src/index.ts"
       ],
+      "@angular-search/invoices/domain-logic": [
+        "libs/invoices/domain-logic/src/index.ts"
+      ],
       "@angular-search/shared/search": ["libs/shared/search/src/index.ts"]
     }
   },
