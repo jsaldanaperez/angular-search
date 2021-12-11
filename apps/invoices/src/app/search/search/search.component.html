@@ -1,4 +1,7 @@
-<angular-search-search domain="invoices">
+<angular-search-search
+  domain="invoices"
+  [configs]="[createInvoiceForCustomerConfig]"
+>
   <angular-search-search-item
     name="Invoice list"
     path=""
@@ -6,5 +9,13 @@
   <angular-search-search-item
     name="Create invoice"
     path="create"
+  ></angular-search-search-item>
+
+  <angular-search-search-item
+    *ngIf="createInvoiceForCustomer"
+    [name]="createInvoiceForCustomer.name"
+    [description]="createInvoiceForCustomer.description"
+    [path]="createInvoiceForCustomer.path"
+    [params]="createInvoiceForCustomer.params"
   ></angular-search-search-item>
 </angular-search-search>

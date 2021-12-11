@@ -14,8 +14,12 @@ export class AppComponent {
       let path = selection.domain;
       if(selection.path){
         path += `/${selection.path}`;
-      } 
-      this.router.navigateByUrl(path);
+      }
+      if(selection.params){
+        this.router.navigate([path, selection.params]);
+      }else{
+        this.router.navigate([path]);
+      }
     })
   }
   

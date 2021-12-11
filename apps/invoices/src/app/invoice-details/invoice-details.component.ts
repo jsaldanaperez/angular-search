@@ -36,6 +36,10 @@ export class InvoiceDetailsComponent implements OnInit {
       this.getInvoice(id);
     }else{
       this.invoice = new Invoice;
+      const customerId = this.activatedRoute.snapshot.paramMap.get('customerId');
+      if(customerId){
+        this.invoice.customerId = customerId;
+      }      
     }
   }
 
