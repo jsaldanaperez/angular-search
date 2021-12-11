@@ -34,8 +34,8 @@ export class SearchComponent<T> implements AfterContentInit {
     private lookUpService: LookUpService,
     private searchService: SearchService,
     pathSelectionService: PathSelectionService){
-    pathSelectionService.path$.subscribe((path) => {
-      searchService.select(this.domain, path);
+    pathSelectionService.path$.subscribe((selectedPath) => {
+      searchService.select(this.domain, selectedPath.path, selectedPath.params);
     })
   }
 

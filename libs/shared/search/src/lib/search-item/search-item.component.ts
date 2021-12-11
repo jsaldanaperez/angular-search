@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ContentChild, ElementRef, Input, OnDestroy, TemplateRef, ViewChild } from '@angular/core';
+import { Params } from '@angular/router';
 import { filter, fromEvent, Subject, takeUntil } from 'rxjs';
 import { KeyAssignmentService } from '../key-assignment.service';
 import { PathSelectionService } from '../path-selection.service';
@@ -14,6 +15,7 @@ export class SearchItemComponent implements AfterViewInit, OnDestroy {
   @Input() name!: string;
   @Input() description!: string;
   @Input() path!: string;
+  @Input() params?: Params;
   @ViewChild('searchItem', { static: true}) searchItem!: ElementRef;
   @ContentChild(TemplateRef) template?: TemplateRef<unknown>;
   public index!: number;
@@ -22,7 +24,7 @@ export class SearchItemComponent implements AfterViewInit, OnDestroy {
   public key!: string;
   private showSearch = false;
   private unsubscribe$ = new Subject();
-  onClick = ()  => this.pathSelectionService.setPath(this.path);
+  onClick = ()  => this.pathSelectionService.setPath(this.path, this.params);
 
   constructor(
     private tabIndexService: TabIndexService,
