@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { finalize } from 'rxjs';
+import { finalize, Observable } from 'rxjs';
 import { Invoice, InvoicesFacadeService } from '@angular-search/invoices/domain-logic';
+import { Customer, CustomersFacadeService } from '@angular-search/customers/domain-logic';
 
 @Component({
   selector: 'angular-search-invoice-details',
@@ -13,13 +14,16 @@ export class InvoiceDetailsComponent implements OnInit {
   invoice!: Invoice;
   loading = false;
   isSaving = false;
+  customers$!: Observable<Customer[]>;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private invoicesFacade: InvoicesFacadeService,
+    private customersFacade: CustomersFacadeService,
     private router: Router) { }
 
   ngOnInit(): void {
+    this.customers$ = this.customersFacade.search();
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     this.activatedRoute.paramMap.subscribe((params) =>{
       const changedId = params.get('id');
