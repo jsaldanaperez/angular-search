@@ -15,9 +15,9 @@ import { KeyAssignmentService } from '../key-assignment.service';
   styleUrls: ['./search.component.scss'],
   providers: [PathSelectionService]
 })
-export class SearchComponent<T> implements AfterContentInit {
+export class SearchComponent implements AfterContentInit {
   @Input() public domain!: string; 
-  @Input() public configs?: SearchConfig<T>[]
+  @Input() public configs?: SearchConfig[]
   @ContentChildren(SearchItemComponent) public  searchItems!: QueryList<SearchItemComponent>;
   private staticSearchItems: SearchItem[] = [];
   private searchSubject = new Subject<string>();

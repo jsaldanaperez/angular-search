@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CustomersFacadeService } from '@angular-search/customers/domain-logic';
 import { SearchItem, SearchConfig } from '@angular-search/shared/search';
+import { InvoicesFacadeService } from '@angular-search/invoices/domain-logic';
 
 @Component({
   selector: 'angular-search-invoices',
@@ -8,9 +9,12 @@ import { SearchItem, SearchConfig } from '@angular-search/shared/search';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent {
-
   public createInvoiceForCustomer?: SearchItem;
-  constructor(private customersFacadeService: CustomersFacadeService){ }
+  public editInvoice?: SearchItem;
+  
+  constructor(
+    private invoicesFacadeService: InvoicesFacadeService,
+    private customersFacadeService: CustomersFacadeService){ }
 
   public readonly createInvoiceForCustomerConfig = SearchConfig.create({
     onSearch: (search: string) => this.customersFacadeService.find(search),
@@ -25,5 +29,19 @@ export class SearchComponent {
       }
     },
     onReset: () => this.createInvoiceForCustomer = undefined
+  })
+
+  public readonly editInvoiceConfig = SearchConfig.create({
+    onSearch: (search: string) => this.invoicesFacadeService.find(search),
+    onResult: (invoice) => {
+      if(invoice){
+        this.editInvoice = {
+          name: `Edit invoice ${invoice.invoiceNumber}`,
+          description: 'Quick way to edit invoice',
+          path: invoice.id,
+        }
+      }
+    },
+    onReset: () => this.editInvoice = undefined
   })
 }
