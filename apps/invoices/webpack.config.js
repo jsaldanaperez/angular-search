@@ -19,15 +19,16 @@ const workspaceRootPath = path.join(__dirname, '../../');
 const sharedMappings = new mf.SharedMappings();
 sharedMappings.register(
   tsConfigPath,
-  ['@angular-search/shared/search'],
+  [
+    /* mapped paths to share */
+  ],
   workspaceRootPath
 );
 
 module.exports = {
   output: {
-    uniqueName: 'shell',
+    uniqueName: 'invoices',
     publicPath: 'auto',
-    scriptType: 'text/javascript',
   },
   optimization: {
     runtimeChunk: false,
@@ -40,38 +41,16 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      exposes: {},
-      remotes: {
-        articles: 'articles@http://localhost:4201/remoteEntry.js',
-        customers: 'customers@http://localhost:4202/remoteEntry.js',
-        invoices: 'invoices@http://localhost:4200/remoteEntry.js',
+      name: 'invoices',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './Module': 'apps/invoices/src/app/remote-entry/entry.module.ts',
       },
       shared: {
-        '@angular/core': {
-          singleton: true,
-          strictVersion: true,
-          requiredVersion: '^13.0.0',
-        },
-        '@angular/common': {
-          singleton: true,
-          strictVersion: true,
-          requiredVersion: '^13.0.0',
-        },
-        '@angular/common/http': {
-          singleton: true,
-          strictVersion: true,
-          requiredVersion: '^13.0.0',
-        },
-        '@angular/router': {
-          singleton: true,
-          strictVersion: true,
-          requiredVersion: '^13.0.0',
-        },
-        '@angular/forms': {
-          singleton: true,
-          strictVersion: true,
-          requiredVersion: '^13.0.0',
-        },
+        '@angular/core': { singleton: true, strictVersion: true },
+        '@angular/common': { singleton: true, strictVersion: true },
+        '@angular/common/http': { singleton: true, strictVersion: true },
+        '@angular/router': { singleton: true, strictVersion: true },
         ...sharedMappings.getDescriptors(),
       },
     }),
