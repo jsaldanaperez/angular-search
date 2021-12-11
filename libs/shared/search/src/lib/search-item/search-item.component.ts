@@ -79,10 +79,6 @@ export class SearchItemComponent implements AfterViewInit, OnDestroy {
       }
     }
 
-    public onMouseMove(): void{
-      this.searchItem.nativeElement.focus();
-    }
-
     public ngOnDestroy(): void{
       this.unsubscribe$.next(true);
       this.unsubscribe$.complete();

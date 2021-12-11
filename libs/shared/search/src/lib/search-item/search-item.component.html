@@ -5,10 +5,9 @@
   (click)="onClick()"
   (keydown)="onKeyDown($event)"
   [tabIndex]="index"
-  (mousemove)="onMouseMove()"
 >
-  <div class="card-body">
-    <strong class="card-title">[{{ key }}]. {{ name }} - {{ index }}</strong>
+  <div class="card-body d-flex justify-content-between">
+    <strong class="card-title">[{{ key }}]. {{ name }}</strong>
     <p class="card-text">
       <ng-content></ng-content>
       {{ description }}
