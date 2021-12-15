@@ -16,10 +16,12 @@ const tsConfigPath =
   path.join(__dirname, '../../tsconfig.base.json');
 
 const workspaceRootPath = path.join(__dirname, '../../');
+const webpackMappingsPath = path.join(__dirname, '../../webpack.mappings.js');
+const webpackMappings = require(webpackMappingsPath);
 const sharedMappings = new mf.SharedMappings();
 sharedMappings.register(
   tsConfigPath,
-  ['@angular-search/shared/search'],
+  webpackMappings.libs,
   workspaceRootPath
 );
 
@@ -47,31 +49,7 @@ module.exports = {
         invoices: 'invoices@http://localhost:4203/remoteEntry.js',
       },
       shared: {
-        '@angular/core': {
-          singleton: true,
-          strictVersion: true,
-          requiredVersion: '^13.0.0',
-        },
-        '@angular/common': {
-          singleton: true,
-          strictVersion: true,
-          requiredVersion: '^13.0.0',
-        },
-        '@angular/common/http': {
-          singleton: true,
-          strictVersion: true,
-          requiredVersion: '^13.0.0',
-        },
-        '@angular/router': {
-          singleton: true,
-          strictVersion: true,
-          requiredVersion: '^13.0.0',
-        },
-        '@angular/forms': {
-          singleton: true,
-          strictVersion: true,
-          requiredVersion: '^13.0.0',
-        },
+        ...webpackMappings.framework,
         ...sharedMappings.getDescriptors(),
       },
     }),
