@@ -27,25 +27,21 @@ jobs:
         with:
           token: ${{ secrets.WORKFLOW_TRIGGER }}
           event-type: shell
-          client-payload: '{"affected": "${{ steps.vars.outputs.tags }}"}'
       - name: Dispatch articles
         if: contains(steps.vars.outputs.tags, 'articles')
         uses: peter-evans/repository-dispatch@v1.1.3
         with:
           token: ${{ secrets.WORKFLOW_TRIGGER }}
           event-type: articles
-          client-payload: '{"affected": "${{ steps.vars.outputs.tags }}"}'
       - name: Dispatch invoices
         if: contains(steps.vars.outputs.tags, 'invoices')
         uses: peter-evans/repository-dispatch@v1.1.3
         with:
           token: ${{ secrets.WORKFLOW_TRIGGER }}
           event-type: invoices
-          client-payload: '{"affected": "${{ steps.vars.outputs.tags }}"}'
       - name: Dispatch customers
         if: contains(steps.vars.outputs.tags, 'customers')
         uses: peter-evans/repository-dispatch@v1.1.3
         with:
           token: ${{ secrets.WORKFLOW_TRIGGER }}
           event-type: customers
-          client-payload: '{"affected": "${{ steps.vars.outputs.tags }}"}'
