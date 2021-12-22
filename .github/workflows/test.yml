@@ -19,10 +19,9 @@ jobs:
     - name: Build
       uses: ng-easy/npm-setup@v1.7.2
     - name: Run affected
+      run: echo '::set-output name=tags::$(npm run --silent ng affected:apps -- --plain --base=remotes/origin/main)'
       id: vars
-      run: echo ::set-output name=tags::"$(npm run --silent ng affected:apps -- --plain --base=remotes/origin/main)"
-    - run: echo "TAGS FOUND"      
-    - run: echo ${{ steps.vars.outputs.tags }}
+    - run: echo "TAGS FOUND ${{ steps.vars.outputs.tags }}"
     - name: Set selected color
       run: echo '::set-output name=SELECTED_COLOR::green'
       id: random-color-generator
