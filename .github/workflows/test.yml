@@ -21,9 +21,11 @@ jobs:
     - name: Run affected
       run: echo ::set-output name=tags::$(npm run --silent ng affected:apps -- --plain --base=origin/main~1 --head=main)
       id: vars
-    - name: Repository Dispatch
-      uses: './.github/workflows/dispatch.yml'
+    - name: Dispatch
+      if: contains(steps.vars.outputs.tags, 'shell')
+      uses: peter-evans/repository-dispatch@v1.1.3
       with:
           token: ${{ secrets.WORKFLOW_TRIGGER }}
-          eventType: default 
+          event-type: shell
+          client-payload: '{"affected": "${{ steps.vars.outputs.tags }}"}'
 
