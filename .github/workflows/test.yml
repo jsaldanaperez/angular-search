@@ -23,6 +23,11 @@ jobs:
       run: echo ::set-output name=tags::"$(npm run --silent ng affected:apps -- --plain --base=remotes/origin/main)"
     - run: echo "TAGS FOUND"      
     - run: echo ${{ steps.vars.outputs.tags }}
+    - name: Set selected color
+      run: echo '::set-output name=SELECTED_COLOR::green'
+      id: random-color-generator
+    - name: Get color
+      run: echo "The selected color is ${{ steps.random-color-generator.outputs.SELECTED_COLOR }}"
     - name: Repository Dispatch
       uses: peter-evans/repository-dispatch@v1.1.3
       with:
