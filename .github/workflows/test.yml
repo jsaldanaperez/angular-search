@@ -15,7 +15,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
       with:
-        submodules: true
+        fetch-depth: 0
     - name: Build
       uses: ng-easy/npm-setup@v1.7.2
     - name: Run affected
