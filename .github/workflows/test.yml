@@ -19,12 +19,13 @@ jobs:
     - name: Build
       uses: ng-easy/npm-setup@v1.7.2
     - name: Run affected
+      id: tags
       shell: bash
       run: |
         export TAGS=$(npm run --silent ng affected:apps -- --plain --base=remotes/origin/main)
-        echo "::set-env name=TAGS::$TAGS"
+        echo "::set-output name=TAGS::TAGS"
     - run: echo "TAGS FOUND"      
-    - run: echo $TAGS      
+    - run: echo ${{ steps.tags.outputs.TAGS }}
     - name: Repository Dispatch
       uses: peter-evans/repository-dispatch@v1.1.3
       with:
