@@ -21,8 +21,7 @@ jobs:
     - name: Run affected
       shell: bash
       run: |
-        value=npm run --silent ng affected:apps -- --plain 
-        export TAGS=value
+        export TAGS=$(npm run --silent ng affected:apps -- --plain --base=remotes/origin/main)
         echo "::set-env name=TAGS::$TAGS"
     - run: echo "TAGS FOUND"      
     - run: echo $TAGS      
