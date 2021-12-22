@@ -22,7 +22,7 @@ jobs:
       id: tags
       shell: bash
       run: |
-        export TAGS=$(npm run --silent ng affected:apps -- --plain --base=remotes/origin/main)
+        TAGS=$(npm run --silent ng affected:apps -- --plain --base=remotes/origin/main)
         echo ::set-output name=TAGS::$(TAGS)
     - run: echo "TAGS FOUND"      
     - run: echo ${{ steps.tags.outputs.TAGS }}
