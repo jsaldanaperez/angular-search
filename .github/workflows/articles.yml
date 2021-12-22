@@ -2,12 +2,10 @@ name: Articles App CI/CD
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
-    types: [opened, synchronize, reopened, closed]
-    branches:
-      - main
+    paths:
+    - './workflows/articles.yml'
+  repository_dispatch:
+    types: [articles]
 
 jobs:
   build_and_deploy_job:
