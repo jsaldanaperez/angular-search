@@ -18,10 +18,13 @@ jobs:
         submodules: true
     - name: Build
       uses: ng-easy/npm-setup@v1.7.2
-    - run: |
-        affected = npm run --silent ng affected:apps -- --plain
-        export TAGS=affected
-        echo "::set-env name=TAGS::$TAGS"
+    - name: PowerShell script
+      uses: Amadevus/pwsh-script@v2.0.1
+      with:
+        script: 
+          $tags= npm run --silent ng affected:apps -- --plain
+          export TAGS=$tags
+          echo "::set-env name=TAGS::$TAGS"
     - run: echo "TAGS FOUND"      
     - run: echo $TAGS      
     - name: Repository Dispatch
