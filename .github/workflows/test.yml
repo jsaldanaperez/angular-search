@@ -6,7 +6,7 @@ on:
     types: [opened, synchronize, reopened, closed]
     branches:
       - main
-      
+
 jobs:
   dipatch:
     runs-on: ubuntu-latest
@@ -18,13 +18,12 @@ jobs:
         submodules: true
     - name: Build
       uses: ng-easy/npm-setup@v1.7.2
-    - name: PowerShell script
-      uses: Amadevus/pwsh-script@v2.0.1
-      with:
-        script:
-          $tags = npm run --silent ng affected:apps -- --plain
-          echo $tags
-      
+    - run: |
+        export tags= npm run --silent ng affected:apps -- --plain
+        export TAGS=npm run --silent ng affected:apps -- --plain
+        echo "::set-env name=TAGS::$TAGS"
+    - run: echo "TAGS FOUND"      
+    - run: echo $TAGS      
     - name: Repository Dispatch
       uses: peter-evans/repository-dispatch@v1.1.3
       with:
