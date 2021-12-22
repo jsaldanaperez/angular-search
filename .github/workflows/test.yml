@@ -1,7 +1,11 @@
-on: 
+on:
   push:
     branches:
-      -main
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - main
       
 jobs:
   dipatch:
