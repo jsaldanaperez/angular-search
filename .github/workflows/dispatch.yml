@@ -1,0 +1,15 @@
+inputs:
+  name: payload
+  required: true
+  name: token
+  required: true
+  
+jobs:
+  dispatch:
+    steps:
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v1.1.3
+        with:
+            token: ${{ inputs.token }}
+            event-type: default
+            client-payload: '{"affected": "${{ inputs.payload }}"}'
