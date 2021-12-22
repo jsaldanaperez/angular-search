@@ -22,7 +22,7 @@ jobs:
       run: echo ::set-output name=tags::$(npm run --silent ng affected:apps -- --plain --base=origin/main~1 --head=main)
       id: vars
     - name: Repository Dispatch
-      uses: './dispatch.yml'
+      uses: 'dispatch.yml'
       with:
           token: ${{ secrets.WORKFLOW_TRIGGER }}
           eventType: default 
