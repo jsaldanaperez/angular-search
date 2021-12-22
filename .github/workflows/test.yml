@@ -21,9 +21,7 @@ jobs:
     - name: Run affected
       id: tags
       shell: bash
-      run: |
-        TAGS=$(npm run --silent ng affected:apps -- --plain --base=remotes/origin/main)
-        echo ::set-output name=TAGS::$(TAGS)
+      run: echo ::set-output name=TAGS::$(npm run --silent ng affected:apps -- --plain --base=remotes/origin/main)
     - run: echo "TAGS FOUND"      
     - run: echo ${{ steps.tags.outputs.TAGS }}
     - name: Repository Dispatch
