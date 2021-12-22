@@ -5,11 +5,10 @@ on:
     paths:
       - './workflows/customers.yml'
   repository_dispatch:
-    types: [default]
+    types: [customers]
 
 jobs:
   build_and_deploy_job:
-    if: contains(github.event.client_payload.affected, 'customers')
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:

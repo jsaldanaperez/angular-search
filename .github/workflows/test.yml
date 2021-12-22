@@ -12,20 +12,40 @@ jobs:
     runs-on: ubuntu-latest
     name: Dispatch
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-    - name: Build
-      uses: ng-easy/npm-setup@v1.7.2
-    - name: Run affected
-      run: echo ::set-output name=tags::$(npm run --silent ng affected:apps -- --plain --base=origin/main~1 --head=main)
-      id: vars
-    - name: Dispatch
-      if: contains(steps.vars.outputs.tags, 'shell')
-      uses: peter-evans/repository-dispatch@v1.1.3
-      with:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Build
+        uses: ng-easy/npm-setup@v1.7.2
+      - name: Run affected
+        run: echo ::set-output name=tags::$(npm run --silent ng affected:apps -- --plain --base=origin/main~1 --head=main)
+        id: vars
+      - name: Dispatch shell
+        if: contains(steps.vars.outputs.tags, 'shell')
+        uses: peter-evans/repository-dispatch@v1.1.3
+        with:
           token: ${{ secrets.WORKFLOW_TRIGGER }}
           event-type: shell
           client-payload: '{"affected": "${{ steps.vars.outputs.tags }}"}'
-
+      - name: Dispatch articles
+        if: contains(steps.vars.outputs.tags, 'articles')
+        uses: peter-evans/repository-dispatch@v1.1.3
+        with:
+          token: ${{ secrets.WORKFLOW_TRIGGER }}
+          event-type: articles
+          client-payload: '{"affected": "${{ steps.vars.outputs.tags }}"}'
+      - name: Dispatch invoices
+        if: contains(steps.vars.outputs.tags, 'invoices')
+        uses: peter-evans/repository-dispatch@v1.1.3
+        with:
+          token: ${{ secrets.WORKFLOW_TRIGGER }}
+          event-type: invoices
+          client-payload: '{"affected": "${{ steps.vars.outputs.tags }}"}'
+      - name: Dispatch customers
+        if: contains(steps.vars.outputs.tags, 'customers')
+        uses: peter-evans/repository-dispatch@v1.1.3
+        with:
+          token: ${{ secrets.WORKFLOW_TRIGGER }}
+          event-type: customers
+          client-payload: '{"affected": "${{ steps.vars.outputs.tags }}"}'

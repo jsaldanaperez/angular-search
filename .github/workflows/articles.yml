@@ -5,11 +5,10 @@ on:
     paths:
       - './workflows/articles.yml'
   repository_dispatch:
-    types: [default]
+    types: [articles]
 
 jobs:
   build_and_deploy_job:
-    if: contains(github.event.client_payload.affected, 'articles')
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
