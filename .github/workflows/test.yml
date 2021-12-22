@@ -6,8 +6,7 @@ on:
     types: [opened, synchronize, reopened, closed]
     branches:
       - main
-env:
-  BEFORE_SHA: ${{ github.event.before }}
+
 jobs:
   dipatch:
     runs-on: ubuntu-latest
@@ -20,7 +19,7 @@ jobs:
     - name: Build
       uses: ng-easy/npm-setup@v1.7.2
     - name: Run affected
-      run: echo ::set-output name=tags::$(npm run --silent ng affected:apps -- --plain --base=$BEFORE_SHA)
+      run: echo ::set-output name=tags::$(npm run --silent ng affected:apps -- --plain --base=main~1 --head=main)
       id: vars
     - run: echo "TAGS FOUND ${{ steps.vars.outputs.tags }}"
     - name: Repository Dispatch
