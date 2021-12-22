@@ -25,11 +25,5 @@ jobs:
       uses: './dispatch.yml'
       with:
           token: ${{ secrets.WORKFLOW_TRIGGER }}
-          eventType: default
-    - name: test
-      uses: peter-evans/repository-dispatch@v1.1.3
-      with:
-          token: ${{ secrets.WORKFLOW_TRIGGER }}
-          event-type: default
-          client-payload: '{"affected": "${{ steps.vars.outputs.tags }}"}'
+          eventType: default 
 
