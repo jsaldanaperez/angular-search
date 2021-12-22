@@ -21,10 +21,10 @@ jobs:
     - name: Run affected
       run: echo ::set-output name=tags::$(npm run --silent ng affected:apps -- --plain --base=origin/main~1 --head=main)
       id: vars
-    - run: echo "TAGS FOUND ${{ steps.vars.outputs.tags }}"
     - name: Repository Dispatch
       uses: peter-evans/repository-dispatch@v1.1.3
       with:
           token: ${{ secrets.WORKFLOW_TRIGGER }}
-          event-type: articles,customers
+          event-type: default
+          client-payload: '{"affedted": "${{ steps.vars.outputs.tags }}"}'
 
