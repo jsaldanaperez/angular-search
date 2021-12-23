@@ -4,7 +4,7 @@ name: Root trigger
 on:
   push:
     paths-ignore:
-      - '.github/workflows'
+      - '.github/workflows/**'
     branches:
       - main
   pull_request:
