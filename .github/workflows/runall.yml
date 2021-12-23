@@ -10,6 +10,8 @@ on:
 jobs:
   dipatch:
     runs-on: ubuntu-latest
+    env:
+      AFFECTED_APPS: ''
     name: Dispatch
     steps:
       - name: Checkout
@@ -19,14 +21,15 @@ jobs:
       - name: Build
         uses: ng-easy/npm-setup@v1.7.2
       - name: Run affected
-        run: echo ::set-output name=tags::$(npm run --silent ng affected:apps -- --plain --base=origin/main~1 --head=main)
-        id: vars
+        run: ${{env.AFFECTED_APPS = $(npm run --silent ng affected:apps -- --plain --base=origin/main~1 --head=main)}} 
   dispatch:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         affected: ['articles','customers']
     steps:
+      - name: Test env
+        run: echo ${{env.AFFECTED_APPS}}
       - name: Publish Event
         uses: peter-evans/repository-dispatch@v1.1.3
         with:
