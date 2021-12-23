@@ -26,8 +26,9 @@ jobs:
       - name: PowerShell script
         uses: Amadevus/pwsh-script@v2.0.1
         with:
-          script:  $value = ${{ steps.set_outputs.tags }}.Trim()
-                   echo "OUTPUT $(value) "
+          script:  |
+            $value = ${{ steps.set_outputs.tags }}.Trim()
+            echo "OUTPUT $(value) "
   dispatch_event:
       needs: [build_affected]
       runs-on: ubuntu-latest
