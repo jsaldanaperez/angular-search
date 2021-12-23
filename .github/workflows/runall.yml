@@ -28,7 +28,7 @@ jobs:
         with:
           script: |
             $tags = npm run --silent ng affected:apps -- --plain --base=origin/main~1 --head=main
-            Write-Host $tags           
+            Write-Host $tags.Trim().Replace(" ", ",")
           
   dispatch_event:
       needs: [build_affected]
