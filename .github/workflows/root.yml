@@ -1,3 +1,6 @@
+
+name: Root trigger
+
 on:
   push:
     paths-ignore:
