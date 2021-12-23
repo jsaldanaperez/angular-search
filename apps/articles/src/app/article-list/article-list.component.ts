@@ -19,5 +19,4 @@ export class ArticleListComponent implements OnInit {
     this.articlesFacadeService.search().pipe(finalize(() => this.loading = false))
       .subscribe((articles) => this.articles = articles);
   }
-
 }
