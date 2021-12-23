@@ -15,7 +15,7 @@ jobs:
   build_affected:
     runs-on: ubuntu-latest
     outputs:
-      affected: ${{ steps.affected_list.outputs.stringList }}
+      affected: ${{ steps.affected.outputs.result }}
     name: Dispatch
     steps:
       - name: Checkout
@@ -33,11 +33,6 @@ jobs:
           script: |
             $tags = npm run --silent ng affected:apps -- --plain --base=origin/main~1 --head=main
             return ConvertTo-Json $tags.Trim().Split(" ")
-      - name: Create list from array of strings
-        id: affected_list
-        uses: lucaspinheirogit/list-from-string-array-action@v1.4.3
-        with:
-          stringArray: ${{steps.affected.outputs.result}}
   dispatch_event:
     needs: [build_affected]
     runs-on: ubuntu-latest
