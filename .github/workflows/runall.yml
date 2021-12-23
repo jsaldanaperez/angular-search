@@ -21,3 +21,14 @@ jobs:
       - name: Run affected
         run: echo ::set-output name=tags::$(npm run --silent ng affected:apps -- --plain --base=origin/main~1 --head=main)
         id: vars
+  dispatch:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        affected: ['articles','customers']
+    steps:
+      - name: Publish Event
+        uses: peter-evans/repository-dispatch@v1.1.3
+        with:
+          token: ${{ secrets.WORKFLOW_TRIGGER }}
+          event-type: ${{matrix.affected}}
