@@ -28,6 +28,7 @@ jobs:
         with:
           # PowerShell script to execute in Actions-hydrated context
           script: |
+            Write-Host "JOB OUTPUTS"
             Write-Host $job.outputs
           
   dispatch_event:
