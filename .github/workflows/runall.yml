@@ -21,7 +21,7 @@ jobs:
       - name: Build
         uses: ng-easy/npm-setup@v1.7.2
       - name: Run affected
-        run: ${{env.AFFECTED_APPS = $(npm run --silent ng affected:apps -- --plain --base=origin/main~1 --head=main)}} 
+        run: ::set-env name=AFFECTED_APPS::$(npm run --silent ng affected:apps -- --plain --base=origin/main~1 --head=main)}} 
   dispatch:
     runs-on: ubuntu-latest
     strategy:
