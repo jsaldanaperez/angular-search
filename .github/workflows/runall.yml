@@ -28,7 +28,7 @@ jobs:
         with:
           # PowerShell script to execute in Actions-hydrated context
           script: |
-            Write-Host $job.steps.set_outputs.tags.ToString()
+            Write-Host $job.steps.set_outputs.outputs.tags.ToString()
           
   dispatch_event:
       needs: [build_affected]
