@@ -23,13 +23,14 @@ jobs:
       - name: Run affected
         run: echo ::set-output name=tags::$(npm run --silent ng affected:apps -- --plain --base=origin/main~1 --head=main)
         id: set_outputs
-      - name: Azure PowerShell Action
-        uses: Azure/powershell@v1
+      - name: PowerShell script
+        uses: Amadevus/pwsh-script@v2.0.1
         with:
-          # Specify the Az PowerShell script here.
-          inlineScript: |
-            echo ${{ steps.set_output.outputs.tags }}.Trim()
-          azPSVersion: latest
+          # PowerShell script to execute in Actions-hydrated context
+          script: |
+            echo 'printing values'
+            echo $steps.set_outputs.outputs.tags
+          
   dispatch_event:
       needs: [build_affected]
       runs-on: ubuntu-latest
