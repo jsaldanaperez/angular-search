@@ -34,7 +34,7 @@ jobs:
             $tags = npm run --silent ng affected:apps -- --plain --base=origin/main~1 --head=main
             return "[" + $tags.Trim().Replace(" ", ",").Split(" ") + "]"
       - name: Create list from array of strings
-          id: affected_list
+        id: affected_list
         uses: lucaspinheirogit/list-from-string-array-action@v1.4.3
         with:
           stringArray: ${{steps.affected.outputs.result}}
