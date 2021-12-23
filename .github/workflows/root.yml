@@ -38,7 +38,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: ${{ fromJSON(needs.build_affected.outputs.affected) }}
+        node: ['customers', 'articles']
     steps:
       - name: Publish Event
         uses: peter-evans/repository-dispatch@v1.1.3
