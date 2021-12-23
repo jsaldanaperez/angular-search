@@ -1,4 +1,3 @@
-
 name: Root trigger
 
 on:
@@ -39,10 +38,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        affected: ${{ fromJSON(needs.build_affected.outputs.affected) }}
+        node: ${{ fromJSON(needs.build_affected.outputs.affected) }}
     steps:
       - name: Publish Event
         uses: peter-evans/repository-dispatch@v1.1.3
         with:
           token: ${{ secrets.WORKFLOW_TRIGGER }}
-          event-type: ${{matrix.affected}}
+          event-type: ${{matrix.node}}
