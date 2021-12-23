@@ -24,8 +24,6 @@ jobs:
           fetch-depth: 0
       - name: Build
         uses: ng-easy/npm-setup@v1.7.2
-      - name: Run affected
-        run: echo ::set-output name=tags::RANDOM_VALUE_1_2_3
       - name: PowerShell script
         uses: Amadevus/pwsh-script@v2.0.1
         id: affected
