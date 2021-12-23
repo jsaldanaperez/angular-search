@@ -11,7 +11,7 @@ jobs:
   build_affected:
     runs-on: ubuntu-latest
     outputs:
-      affected: ${{ steps.set_outputs.outputs.tags }}
+      affected: ${{ steps.set_outputs.outputs.result }}
     name: Dispatch
     steps:
       - name: Checkout
