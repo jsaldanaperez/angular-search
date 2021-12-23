@@ -1,0 +1,23 @@
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - main
+      
+jobs:
+  dipatch:
+    runs-on: ubuntu-latest
+    name: Dispatch
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Build
+        uses: ng-easy/npm-setup@v1.7.2
+      - name: Run affected
+        run: echo ::set-output name=tags::$(npm run --silent ng affected:apps -- --plain --base=origin/main~1 --head=main)
+        id: vars
