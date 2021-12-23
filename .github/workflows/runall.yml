@@ -11,7 +11,7 @@ jobs:
   build_affected:
     runs-on: ubuntu-latest
     outputs:
-      affected: 'articles'
+      affected: ${{ join(steps.set_outputs.outputs.tags, ',' }}
     name: Dispatch
     steps:
       - name: Checkout
@@ -23,13 +23,17 @@ jobs:
       - name: Run affected
         run: echo ::set-output name=tags::$(npm run --silent ng affected:apps -- --plain --base=origin/main~1 --head=main)
         id: set_outputs
-        
+      - name: PowerShell script
+        uses: Amadevus/pwsh-script@v2.0.1
+        with:
+          script:  $value = ${{ steps.set_outputs.tags }}.Trim() \
+                   echo "OUTPUT $(value) "
   dispatch_event:
       needs: [build_affected]
       runs-on: ubuntu-latest
       strategy:
         matrix:
-          affected: ${{ needs.build_affected.outputs.affected}}
+          affected: ${{ fromJSON(needs.build_affected.outputs.affected) }}
       steps:
         - name: Publish Event
           uses: peter-evans/repository-dispatch@v1.1.3
