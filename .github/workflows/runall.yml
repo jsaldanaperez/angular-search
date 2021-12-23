@@ -28,7 +28,6 @@ jobs:
         with:
           # PowerShell script to execute in Actions-hydrated context
           script: |
-            echo 'printing values' |
             echo $job.ToString()
           
   dispatch_event:
