@@ -32,13 +32,15 @@ jobs:
         with:
           script: |
             $tags = npm run --silent ng affected:apps -- --plain --base=origin/main~1 --head=main
-            return ConvertTo-Json $tags.Trim().Replace(" ", ",").Split(" ")
+            $array = ConvertTo-Json $tags.Trim().Replace(" ", ",").Split(" ")
+            Write-Host $array
+            return $array
   dispatch_event:
     needs: [build_affected]
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [${{fromJSON(needs.build_affected.outputs.affected) }}]
+        node: ${{needs.build_affected.outputs.affected}}
     steps:
       - name: Publish Event
         uses: peter-evans/repository-dispatch@v1.1.3
