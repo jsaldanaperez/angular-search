@@ -11,7 +11,7 @@ jobs:
   build_affected:
     runs-on: ubuntu-latest
     outputs:
-      affected: ${{ steps.set_outputs.outputs.tags }}
+      affected: 'articles'
     name: Dispatch
     steps:
       - name: Checkout
@@ -31,8 +31,6 @@ jobs:
         matrix:
           affected: ${{ needs.build_affected.outputs.affected}}
       steps:
-        - name: Test env
-          run: echo ${{env.AFFECTED_APPS}}
         - name: Publish Event
           uses: peter-evans/repository-dispatch@v1.1.3
           with:
