@@ -29,7 +29,7 @@ jobs:
           # PowerShell script to execute in Actions-hydrated context
           script: |
             echo 'printing values'
-            echo $job.steps.set_outputs.outputs.tags
+            echo $job
           
   dispatch_event:
       needs: [build_affected]
