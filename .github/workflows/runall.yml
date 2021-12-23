@@ -29,6 +29,7 @@ jobs:
           # Specify the Az PowerShell script here.
           inlineScript: |
             echo ${{ steps.set_output.outputs.tags }}.Trim()
+          azPSVersion: latest
   dispatch_event:
       needs: [build_affected]
       runs-on: ubuntu-latest
