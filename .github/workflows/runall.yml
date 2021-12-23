@@ -22,14 +22,13 @@ jobs:
         uses: ng-easy/npm-setup@v1.7.2
       - name: Run affected
         run: echo ::set-output name=tags::RANDOM_VALUE_1_2_3
-        id: set_outputs
       - name: PowerShell script
         uses: Amadevus/pwsh-script@v2.0.1
+        id: set_outputs
         with:
-          # PowerShell script to execute in Actions-hydrated context
           script: |
-            Write-Host "JOB OUTPUTS"
-            Write-Host $job.outputs
+            $tags = npm run --silent ng affected:apps -- --plain --base=origin/main~1 --head=main
+            Write-Host $tags           
           
   dispatch_event:
       needs: [build_affected]
