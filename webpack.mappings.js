@@ -1,6 +1,4 @@
-libs = [
-    '@angular-search/shared/search'
-];
+libs = ['@app/shared/search'];
 
 framework = {
   '@angular/core': {
@@ -27,10 +25,10 @@ framework = {
     singleton: true,
     strictVersion: true,
     requiredVersion: '^13.0.0',
-  }
-}
+  },
+};
 
 module.exports = {
-    libs: libs,
-    framework: framework
-}
+  libs: libs,
+  framework: framework,
+};

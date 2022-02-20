@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { SharedSearchModule } from '@angular-search/shared/search';
+import { SharedSearchModule } from '@app/shared/search';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({

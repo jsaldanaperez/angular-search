@@ -7,7 +7,7 @@ import { SearchModalEventsService } from '../search-modal/search-modal-events.se
 import { TabIndexService } from '../tab-index.service';
 
 @Component({
-  selector: 'angular-search-search-item',
+  selector: 'app-search-item',
   templateUrl: './search-item.component.html',
   styleUrls: ['./search-item.component.scss']
 })

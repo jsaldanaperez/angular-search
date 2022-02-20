@@ -10,7 +10,7 @@ import { TabIndexService } from '../tab-index.service';
 import { KeyAssignmentService } from '../key-assignment.service';
 
 @Component({
-  selector: 'angular-search-search',
+  selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
   providers: [PathSelectionService]

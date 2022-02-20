@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'angular-search-customers-entry',
+  selector: 'app-customers-entry',
   template: `<div class="remote-entry">
     <h2>customers's Remote Entry Component</h2>
   </div>`,

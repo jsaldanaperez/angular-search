@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { CustomersFacadeService } from '@angular-search/customers/domain-logic';
-import { SearchItem, SearchConfig } from '@angular-search/shared/search';
-import { InvoicesFacadeService } from '@angular-search/invoices/domain-logic';
+import { CustomersFacadeService } from '@app/customers/domain-logic';
+import { SearchItem, SearchConfig } from '@app/shared/search';
+import { InvoicesFacadeService } from '@app/invoices/domain-logic';
 
 @Component({
-  selector: 'angular-search-invoices',
+  selector: 'app-invoices',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })

@@ -7,7 +7,7 @@ import { KeyAssignmentService } from '../key-assignment.service';
 import { TabIndexService } from '../tab-index.service';
 
 @Component({
-  selector: 'angular-search-search-modal',
+  selector: 'app-search-modal',
   templateUrl: './search-modal.component.html',
   styleUrls: ['./search-modal.component.scss'],
 })

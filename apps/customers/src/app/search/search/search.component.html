@@ -1,17 +1,7 @@
-<angular-search-search
-  domain="customers"
-  [configs]="[editCustomerSearchConfig]"
->
-  <angular-search-search-item name="Customer list" path="">
-  </angular-search-search-item>
-  <angular-search-search-item
-    name="Create customer"
-    path="create"
-  ></angular-search-search-item>
-  <angular-search-search-item
-    *ngIf="editCustomer"
-    [name]="editCustomer.name"
-    [description]="editCustomer.description"
-    [path]="editCustomer.path"
-  ></angular-search-search-item>
-</angular-search-search>
+<app-search domain="customers" [configs]="[editCustomerSearchConfig]">
+  <app-search-item name="Customer list" path="">
+  </app-search-item>
+  <app-search-item name="Create customer" path="create"></app-search-item>
+  <app-search-item *ngIf="editCustomer" [name]="editCustomer.name" [description]="editCustomer.description"
+    [path]="editCustomer.path"></app-search-item>
+</app-search>

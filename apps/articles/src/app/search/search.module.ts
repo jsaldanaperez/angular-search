@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { SearchRoutingModule } from './search-routing.module';
 import { SearchComponent } from './search/search.component';
-import { SharedSearchModule } from '@angular-search/shared/search';
+import { SharedSearchModule } from '@app/shared/search';
 
 
 @NgModule({

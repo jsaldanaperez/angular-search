@@ -13,12 +13,7 @@
           <h4 class="text-white">Contact</h4>
           <ul class="list-unstyled">
             <li>
-              <a
-                href="https://github.com/jsaldanaperez"
-                target="_blank"
-                class="text-white"
-                >Follow on GitHub</a
-              >
+              <a href="https://github.com/jsaldanaperez" target="_blank" class="text-white">Follow on GitHub</a>
             </li>
           </ul>
         </div>
@@ -30,32 +25,21 @@
       <a href="#" class="navbar-brand d-flex align-items-center">
         <strong>Angular search</strong>
       </a>
-      <button
-        class="navbar-toggler collapsed"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarHeader"
-        aria-controls="navbarHeader"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
+      <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader"
+        aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
     </div>
   </div>
 </header>
-<angular-search-search-modal>
-  <angular-search-search domain="">
-    <angular-search-search-item
-      name="Dashboard"
-      description="Key combinations"
-      path=""
-    ></angular-search-search-item>
-  </angular-search-search>
+<app-search-modal>
+  <app-search domain="">
+    <app-search-item name="Dashboard" description="Key combinations" path=""></app-search-item>
+  </app-search>
   <router-outlet name="articles"></router-outlet>
   <router-outlet name="customers"></router-outlet>
   <router-outlet name="invoices"></router-outlet>
-</angular-search-search-modal>
+</app-search-modal>
 <div class="p-2">
   <router-outlet></router-outlet>
 </div>

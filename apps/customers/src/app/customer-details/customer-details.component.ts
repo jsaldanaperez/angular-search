@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { finalize } from 'rxjs';
-import { CustomersFacadeService, Customer } from '@angular-search/customers/domain-logic';
+import { CustomersFacadeService, Customer } from '@app/customers/domain-logic';
 
 @Component({
-  selector: 'angular-search-customer-details',
+  selector: 'app-customer-details',
   templateUrl: './customer-details.component.html',
   styleUrls: ['./customer-details.component.scss']
 })

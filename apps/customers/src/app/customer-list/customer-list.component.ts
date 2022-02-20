@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { finalize } from 'rxjs';
-import { CustomersFacadeService, Customer } from '@angular-search/customers/domain-logic';
+import { CustomersFacadeService, Customer } from '@app/customers/domain-logic';
 
 @Component({
-  selector: 'angular-search-customer-list',
+  selector: 'app-customer-list',
   templateUrl: './customer-list.component.html',
   styleUrls: ['./customer-list.component.scss']
 })

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { SearchConfig, SearchItem } from '@angular-search/shared/search';
-import { CustomersFacadeService } from '@angular-search/customers/domain-logic';
+import { SearchConfig, SearchItem } from '@app/shared/search';
+import { CustomersFacadeService } from '@app/customers/domain-logic';
 
 @Component({
-  selector: 'angular-search-customers',
+  selector: 'app-customers',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })

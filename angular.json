@@ -1,11 +1,14 @@
 {
+  "cli": {
+    "analytics": false
+  },
   "version": 1,
   "projects": {
     "articles": {
       "projectType": "application",
       "root": "apps/articles",
       "sourceRoot": "apps/articles/src",
-      "prefix": "angular-search",
+      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:webpack-browser",
@@ -110,7 +113,7 @@
       "projectType": "library",
       "root": "libs/articles/domain-logic",
       "sourceRoot": "libs/articles/domain-logic/src",
-      "prefix": "angular-search",
+      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:ng-packagr-lite",
@@ -152,7 +155,7 @@
       "projectType": "application",
       "root": "apps/customers",
       "sourceRoot": "apps/customers/src",
-      "prefix": "angular-search",
+      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:webpack-browser",
@@ -256,7 +259,7 @@
       "projectType": "library",
       "root": "libs/customers/domain-logic",
       "sourceRoot": "libs/customers/domain-logic/src",
-      "prefix": "angular-search",
+      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:ng-packagr-lite",
@@ -298,7 +301,7 @@
       "projectType": "application",
       "root": "apps/invoices",
       "sourceRoot": "apps/invoices/src",
-      "prefix": "angular-search",
+      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:webpack-browser",
@@ -402,7 +405,7 @@
       "projectType": "library",
       "root": "libs/invoices/domain-logic",
       "sourceRoot": "libs/invoices/domain-logic/src",
-      "prefix": "angular-search",
+      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:ng-packagr-lite",
@@ -444,7 +447,7 @@
       "projectType": "library",
       "root": "libs/shared/search",
       "sourceRoot": "libs/shared/search/src",
-      "prefix": "angular-search",
+      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:ng-packagr-lite",
@@ -486,7 +489,7 @@
       "projectType": "application",
       "root": "apps/shell",
       "sourceRoot": "apps/shell/src",
-      "prefix": "angular-search",
+      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:webpack-browser",

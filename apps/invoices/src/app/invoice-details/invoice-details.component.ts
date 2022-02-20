@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { finalize, Observable } from 'rxjs';
-import { Invoice, InvoicesFacadeService } from '@angular-search/invoices/domain-logic';
-import { Customer, CustomersFacadeService } from '@angular-search/customers/domain-logic';
+import { Invoice, InvoicesFacadeService } from '@app/invoices/domain-logic';
+import { Customer, CustomersFacadeService } from '@app/customers/domain-logic';
 
 @Component({
-  selector: 'angular-search-invoice-details',
+  selector: 'app-invoice-details',
   templateUrl: './invoice-details.component.html',
   styleUrls: ['./invoice-details.component.scss']
 })

@@ -21,7 +21,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "angular-search",
+            "prefix": "app",
             "style": "kebab-case"
           }
         ]

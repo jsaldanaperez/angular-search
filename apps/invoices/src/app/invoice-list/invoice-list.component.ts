@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { InvoicesFacadeService, Invoice } from '@angular-search/invoices/domain-logic';
+import { InvoicesFacadeService, Invoice } from '@app/invoices/domain-logic';
 import { finalize } from 'rxjs/operators';
 
 @Component({
-  selector: 'angular-search-invoice-list',
+  selector: 'app-invoice-list',
   templateUrl: './invoice-list.component.html',
   styleUrls: ['./invoice-list.component.scss']
 })

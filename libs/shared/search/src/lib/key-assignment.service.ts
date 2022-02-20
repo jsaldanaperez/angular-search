@@ -15,6 +15,7 @@ import { Injectable } from '@angular/core';
          if(event.ctrlKey){
           const keyAssignment = this.keyAssignments.find(x => x === event.key);
           if(keyAssignment){
+            event.preventDefault();
             this.selectedKeySubject.next(keyAssignment);
           }
          }

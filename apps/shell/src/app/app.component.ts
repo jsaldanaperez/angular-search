@@ -1,9 +1,9 @@
 import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { filter, fromEvent } from 'rxjs';
-import { SearchService } from '@angular-search/shared/search';
+import { SearchService } from '@app/shared/search';
 import { Router } from '@angular/router';
 @Component({
-  selector: 'angular-search-root',
+  selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Article, ArticlesFacadeService } from '@angular-search/articles/domain-logic';
+import { Article, ArticlesFacadeService } from '@app/articles/domain-logic';
 import { finalize } from 'rxjs';
 
 @Component({
-  selector: 'angular-search-article-details',
+  selector: 'app-article-details',
   templateUrl: './article-details.component.html',
   styleUrls: ['./article-details.component.scss']
 })

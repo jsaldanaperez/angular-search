@@ -1,5 +1,5 @@
 {
-  "npmScope": "angular-search",
+  "npmScope": "app",
   "affected": {
     "defaultBase": "main"
   },
@@ -46,5 +46,5 @@
       "style": "scss"
     }
   },
-  "defaultProject": "apps/shell"
+  "defaultProject": "shell"
 }

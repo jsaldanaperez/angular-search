@@ -15,16 +15,12 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@angular-search/articles/domain-logic": [
-        "libs/articles/domain-logic/src/index.ts"
-      ],
-      "@angular-search/customers/domain-logic": [
+      "@app/articles/domain-logic": ["libs/articles/domain-logic/src/index.ts"],
+      "@app/customers/domain-logic": [
         "libs/customers/domain-logic/src/index.ts"
       ],
-      "@angular-search/invoices/domain-logic": [
-        "libs/invoices/domain-logic/src/index.ts"
-      ],
-      "@angular-search/shared/search": ["libs/shared/search/src/index.ts"]
+      "@app/invoices/domain-logic": ["libs/invoices/domain-logic/src/index.ts"],
+      "@app/shared/search": ["libs/shared/search/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

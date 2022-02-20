@@ -1,28 +1,11 @@
-<angular-search-search
-  domain="invoices"
-  [configs]="[createInvoiceForCustomerConfig, editInvoiceConfig]"
->
-  <angular-search-search-item
-    name="Invoice list"
-    path=""
-  ></angular-search-search-item>
-  <angular-search-search-item
-    name="Create invoice"
-    path="create"
-  ></angular-search-search-item>
+<app-search domain="invoices" [configs]="[createInvoiceForCustomerConfig, editInvoiceConfig]">
+  <app-search-item name="Invoice list" path=""></app-search-item>
+  <app-search-item name="Create invoice" path="create"></app-search-item>
 
-  <angular-search-search-item
-    *ngIf="createInvoiceForCustomer"
-    [name]="createInvoiceForCustomer.name"
-    [description]="createInvoiceForCustomer.description"
-    [path]="createInvoiceForCustomer.path"
-    [params]="createInvoiceForCustomer.params"
-  ></angular-search-search-item>
+  <app-search-item *ngIf="createInvoiceForCustomer" [name]="createInvoiceForCustomer.name"
+    [description]="createInvoiceForCustomer.description" [path]="createInvoiceForCustomer.path"
+    [params]="createInvoiceForCustomer.params"></app-search-item>
 
-  <angular-search-search-item
-    *ngIf="editInvoice"
-    [name]="editInvoice.name"
-    [description]="editInvoice.description"
-    [path]="editInvoice.path"
-  ></angular-search-search-item>
-</angular-search-search>
+  <app-search-item *ngIf="editInvoice" [name]="editInvoice.name" [description]="editInvoice.description"
+    [path]="editInvoice.path"></app-search-item>
+</app-search>
