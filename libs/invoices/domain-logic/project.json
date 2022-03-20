@@ -1,0 +1,42 @@
+{
+  "projectType": "library",
+  "root": "libs/invoices/domain-logic",
+  "sourceRoot": "libs/invoices/domain-logic/src",
+  "prefix": "app",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "outputs": ["dist/libs/invoices/domain-logic"],
+      "options": {
+        "project": "libs/invoices/domain-logic/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/invoices/domain-logic/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/invoices/domain-logic/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/invoices/domain-logic"],
+      "options": {
+        "jestConfig": "libs/invoices/domain-logic/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/invoices/domain-logic/src/**/*.ts",
+          "libs/invoices/domain-logic/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

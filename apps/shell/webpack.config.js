@@ -19,21 +19,19 @@ const workspaceRootPath = path.join(__dirname, '../../');
 const webpackMappingsPath = path.join(__dirname, '../../webpack.mappings.js');
 const webpackMappings = require(webpackMappingsPath);
 const sharedMappings = new mf.SharedMappings();
-sharedMappings.register(
-  tsConfigPath,
-  webpackMappings.libs,
-  workspaceRootPath
-);
+sharedMappings.register(tsConfigPath, webpackMappings.libs, workspaceRootPath);
 
 module.exports = {
+  experiments: {
+    outputModule: true,
+  },
   output: {
     uniqueName: 'shell',
-    publicPath: 'auto',
-    scriptType: 'text/javascript'
+    publicPath: 'auto'
   },
   optimization: {
     runtimeChunk: false,
-    minimize: false,
+    minimize: true,
   },
   resolve: {
     alias: {
@@ -42,16 +40,19 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
+      library: {
+        type: 'module',
+      },
       exposes: {},
       remotes: {
-        articles: 'articles@http://localhost:4201/remoteEntry.js',
-        customers: 'customers@http://localhost:4202/remoteEntry.js',
-        invoices: 'invoices@http://localhost:4203/remoteEntry.js',
+        articles: 'http://localhost:4201/remoteEntry.js',
+        customers: 'http://localhost:4202/remoteEntry.js',
+        invoices: 'http://localhost:4203/remoteEntry.js',
       },
-      shared: {
+      shared: mf.share({
         ...webpackMappings.framework,
         ...sharedMappings.getDescriptors(),
-      },
+      }),
     }),
     sharedMappings.getPlugin(),
   ],

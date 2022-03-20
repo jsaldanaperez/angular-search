@@ -19,21 +19,19 @@ const workspaceRootPath = path.join(__dirname, '../../');
 const webpackMappingsPath = path.join(__dirname, '../../webpack.mappings.js');
 const webpackMappings = require(webpackMappingsPath);
 const sharedMappings = new mf.SharedMappings();
-sharedMappings.register(
-  tsConfigPath,
-  webpackMappings.libs,
-  workspaceRootPath
-);
+sharedMappings.register(tsConfigPath, webpackMappings.libs, workspaceRootPath);
 
 module.exports = {
   output: {
     uniqueName: 'customers',
-    publicPath: 'auto',
-    scriptType: 'text/javascript'
+    publicPath: 'auto'
   },
   optimization: {
     runtimeChunk: false,
-    minimize: false,
+    minimize: true,
+  },
+  experiments: {
+    outputModule: true,
   },
   resolve: {
     alias: {
@@ -42,16 +40,20 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
+      library: {
+        type: 'module',
+      },
       name: 'customers',
       filename: 'remoteEntry.js',
       exposes: {
-        './SearchModule' : 'apps/customers/src/app/search/search.module.ts',
-        './RemoteEntryModule': 'apps/customers/src/app/remote-entry/entry.module.ts',
+        './SearchModule': 'apps/customers/src/app/search/search.module.ts',
+        './RemoteEntryModule':
+          'apps/customers/src/app/remote-entry/entry.module.ts',
       },
-      shared: {
+      shared: mf.share({
         ...webpackMappings.framework,
         ...sharedMappings.getDescriptors(),
-      },
+      }),
     }),
     sharedMappings.getPlugin(),
   ],
