@@ -1,28 +1,23 @@
 import { Component } from '@angular/core';
 import { SearchConfig, SearchItem } from '@app/shared/search';
-import { ArticlesFacadeService } from '@app/articles/domain-logic';
+import { of } from 'rxjs';
 
 @Component({
-  selector: 'app-articles',
+  selector: 'app-<%= project-name %>',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })
-export class SearchComponent{  
-  public editArticle?: SearchItem;
+export class SearchComponent {
+  public searchItem?: SearchItem;
 
-  constructor(private articlesFacadeService: ArticlesFacadeService){ }
 
-  public readonly editArticleSearchConfig = SearchConfig.create({
-    onSearch: (search: string) => this.articlesFacadeService.find(search),
-    onResult: (article) => {
-      if(article){
-        this.editArticle = {
-          name: `Edit article ${article.name}`,
-          description: 'Quick way to go to edit',
-          path: article.id
-        }
+  public readonly searchConfig = SearchConfig.create({
+    onSearch: (search: string) => of(),
+    onResult: (entity) => {
+      if (entity) {
+        //assign value to searchItem
       }
     },
-    onReset: () => this.editArticle = undefined
+    onReset: () => (this.searchItem = undefined),
   });
 }

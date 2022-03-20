@@ -1,20 +1,30 @@
-import { Tree, formatFiles, installPackagesTask, generateFiles, joinPathFragments, readProjectConfiguration } from '@nrwl/devkit';
+import {
+  Tree,
+  formatFiles,
+  installPackagesTask,
+  generateFiles,
+  joinPathFragments,
+  readProjectConfiguration,
+} from '@nrwl/devkit';
 import { libraryGenerator } from '@nrwl/workspace/generators';
 
 export default async function (tree: Tree, schema: any) {
-  await libraryGenerator(tree, { name: schema.name });
-  const projectRoot = readProjectConfiguration(tree, schema.name).root;
-  generateFiles(
-    tree, // the virtual file system
-    joinPathFragments(__dirname, './files'), // path to the file templates
-    projectRoot, // destination path of the files
-    {
+  const projectRoot = readProjectConfiguration(tree, schema.projectName).root;
+  console.log('projectRoot', projectRoot)
+  const filesPath = joinPathFragments(tree.root, './tools/generators/add-search/files');
+  console.log('filesPath', filesPath);
 
-    } // config object to replace variable in file templates
-  );
+  // generateFiles(
+  //   tree, // the virtual file system
+  //   projectPath, // path to the file templates
+  //   projectRoot, // destination path of the files
+  //   {
 
-  await formatFiles(tree);
-  return () => {
-    installPackagesTask(tree);
-  };
+  //   } // config object to replace variable in file templates
+  // );
+
+  // await formatFiles(tree);
+  // return () => {
+  //   installPackagesTask(tree);
+  // };
 }

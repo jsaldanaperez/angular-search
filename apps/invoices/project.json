@@ -1,0 +1,101 @@
+{
+  "projectType": "application",
+  "root": "apps/invoices",
+  "sourceRoot": "apps/invoices/src",
+  "prefix": "app",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/invoices",
+        "index": "apps/invoices/src/index.html",
+        "main": "apps/invoices/src/main.ts",
+        "polyfills": "apps/invoices/src/polyfills.ts",
+        "tsConfig": "apps/invoices/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": ["apps/invoices/src/favicon.ico", "apps/invoices/src/assets"],
+        "styles": ["apps/invoices/src/styles.scss"],
+        "scripts": [],
+        "customWebpackConfig": {
+          "path": "apps/invoices/webpack.config.js"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/invoices/src/environments/environment.ts",
+              "with": "apps/invoices/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all",
+          "customWebpackConfig": {
+            "path": "apps/invoices/webpack.prod.config.js"
+          }
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nrwl/angular:webpack-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "invoices:build:production"
+        },
+        "development": {
+          "browserTarget": "invoices:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "publicHost": "http://localhost:4203",
+        "port": 4203
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "invoices:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/invoices/src/**/*.ts",
+          "apps/invoices/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/invoices"],
+      "options": {
+        "jestConfig": "apps/invoices/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

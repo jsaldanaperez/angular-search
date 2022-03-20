@@ -1,7 +1,2 @@
-<app-search domain="articles" [configs]="[editArticleSearchConfig]">
-  <app-search-item name="Article list" path=""></app-search-item>
-  <app-search-item name="Create article" path="create"></app-search-item>
-  <app-search-item *ngIf="editArticle" [name]="editArticle.name" [description]="editArticle.description"
-    [path]="editArticle.path">
-  </app-search-item>
+<app-search domain="<%= projectName %>" [configs]="[searchConfig]">
 </app-search>
