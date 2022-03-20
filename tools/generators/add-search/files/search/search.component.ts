@@ -3,7 +3,7 @@ import { SearchConfig, SearchItem } from '@app/shared/search';
 import { of } from 'rxjs';
 
 @Component({
-  selector: 'app-<%= project-name %>',
+  selector: 'app-<%= projectName %>',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })
