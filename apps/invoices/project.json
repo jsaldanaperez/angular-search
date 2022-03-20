@@ -6,7 +6,9 @@
   "targets": {
     "build": {
       "executor": "@nrwl/angular:webpack-browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/invoices",
         "index": "apps/invoices/src/index.html",
@@ -14,12 +16,18 @@
         "polyfills": "apps/invoices/src/polyfills.ts",
         "tsConfig": "apps/invoices/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/invoices/src/favicon.ico", "apps/invoices/src/assets"],
-        "styles": ["apps/invoices/src/styles.scss"],
+        "assets": [
+          "apps/invoices/src/favicon.ico",
+          "apps/invoices/src/assets"
+        ],
+        "styles": [
+          "apps/invoices/src/styles.scss"
+        ],
         "scripts": [],
         "customWebpackConfig": {
           "path": "apps/invoices/webpack.config.js"
-        }
+        },
+        "buildLibsFromSource": false
       },
       "configurations": {
         "production": {
@@ -90,7 +98,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/invoices"],
+      "outputs": [
+        "coverage/apps/invoices"
+      ],
       "options": {
         "jestConfig": "apps/invoices/jest.config.js",
         "passWithNoTests": true

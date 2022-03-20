@@ -6,7 +6,9 @@
   "targets": {
     "build": {
       "executor": "@nrwl/angular:webpack-browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/customers",
         "index": "apps/customers/src/index.html",
@@ -18,11 +20,14 @@
           "apps/customers/src/favicon.ico",
           "apps/customers/src/assets"
         ],
-        "styles": ["apps/customers/src/styles.scss"],
+        "styles": [
+          "apps/customers/src/styles.scss"
+        ],
         "scripts": [],
         "customWebpackConfig": {
           "path": "apps/customers/webpack.config.js"
-        }
+        },
+        "buildLibsFromSource": false
       },
       "configurations": {
         "production": {
@@ -93,7 +98,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/customers"],
+      "outputs": [
+        "coverage/apps/customers"
+      ],
       "options": {
         "jestConfig": "apps/customers/jest.config.js",
         "passWithNoTests": true

@@ -6,7 +6,9 @@
   "targets": {
     "build": {
       "executor": "@nrwl/angular:webpack-browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/shell",
         "index": "apps/shell/src/index.html",
@@ -14,15 +16,21 @@
         "polyfills": "apps/shell/src/polyfills.ts",
         "tsConfig": "apps/shell/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/shell/src/favicon.ico", "apps/shell/src/assets"],
+        "assets": [
+          "apps/shell/src/favicon.ico",
+          "apps/shell/src/assets"
+        ],
         "styles": [
           "node_modules/bootstrap/dist/css/bootstrap.min.css",
           "apps/shell/src/styles.scss"
         ],
-        "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"],
+        "scripts": [
+          "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+        ],
         "customWebpackConfig": {
           "path": "apps/shell/webpack.config.js"
-        }
+        },
+        "buildLibsFromSource": false
       },
       "configurations": {
         "production": {
@@ -72,7 +80,8 @@
       },
       "defaultConfiguration": "development",
       "options": {
-        "port": 4200
+        "port": 4200,
+        "publicHost": "http://localhost:4200"
       }
     },
     "extract-i18n": {
@@ -92,7 +101,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/shell"],
+      "outputs": [
+        "coverage/apps/shell"
+      ],
       "options": {
         "jestConfig": "apps/shell/jest.config.js",
         "passWithNoTests": true

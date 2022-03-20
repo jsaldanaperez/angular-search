@@ -2,13 +2,14 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
-    "types": []
+    "types": [],
+    "target": "ES2020"
   },
   "files": [
-    "src/main.ts", 
-    "src/polyfills.ts", 
-    "src/app/search/search.module.ts", 
-    "src/app/remote-entry/remote-entry.module.ts" 
+    "src/main.ts",
+    "src/polyfills.ts",
+    "src/app/search/search.module.ts",
+    "src/app/remote-entry/remote-entry.module.ts"
   ],
   "include": ["src/**/*.d.ts"],
   "exclude": ["**/*.test.ts", "**/*.spec.ts"]

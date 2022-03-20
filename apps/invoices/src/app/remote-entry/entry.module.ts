@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { InvoiceListComponent } from '../invoice-list/invoice-list.component';
@@ -5,11 +6,12 @@ import { InvoiceDetailsComponent } from '../invoice-details/invoice-details.comp
 
 @NgModule({
   imports: [
+    CommonModule,
     RouterModule.forChild([
-      { path: '', component: InvoiceListComponent},
-      { path: 'create', component: InvoiceDetailsComponent},
-      { path: ':id', component: InvoiceDetailsComponent}
-    ])
+      { path: '', component: InvoiceListComponent },
+      { path: 'create', component: InvoiceDetailsComponent },
+      { path: ':id', component: InvoiceDetailsComponent },
+    ]),
   ],
   providers: [],
 })
