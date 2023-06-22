@@ -39,7 +39,7 @@ jobs:
         node: ${{fromJson(needs.build_affected.outputs.affected)}}
     steps:
       - name: Publish Event
-        uses: peter-evans/repository-dispatch@v1.1.3
+        uses: peter-evans/repository-dispatch@v2
         with:
           token: ${{ secrets.WORKFLOW_TRIGGER }}
           event-type: ${{matrix.node}}
