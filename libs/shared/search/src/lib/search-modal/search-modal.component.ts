@@ -51,7 +51,6 @@ export class SearchModalComponent<T> implements OnInit, AfterViewInit {
   }
 
   public onSearch(): void{
-    console.log('onSearch', this.searchValue)
     this.searchService.search(this.searchValue);
   }
 }

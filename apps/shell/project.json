@@ -23,8 +23,7 @@
         "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"],
         "customWebpackConfig": {
           "path": "apps/shell/webpack.config.js"
-        },
-        "buildLibsFromSource": false
+        }
       },
       "configurations": {
         "production": {

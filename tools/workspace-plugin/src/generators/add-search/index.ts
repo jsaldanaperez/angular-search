@@ -6,7 +6,6 @@ import {
   updateJson,
   generateFiles,
 } from '@nrwl/devkit';
-import * as ts from 'typescript';
 import { tsquery } from '@phenomnomnominal/tsquery';
 
 export default async function (tree: Tree, schema: any) {

@@ -21,8 +21,7 @@
         "scripts": [],
         "customWebpackConfig": {
           "path": "apps/articles/webpack.config.js"
-        },
-        "buildLibsFromSource": false
+        }
       },
       "configurations": {
         "production": {
