@@ -44,7 +44,9 @@
   },
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
-    "sharedGlobals": [],
+    "sharedGlobals": [
+      "{workspaceRoot}/.github/workflows/*"
+    ],
     "production": [
       "default",
       "!{projectRoot}/.eslintrc.json",
