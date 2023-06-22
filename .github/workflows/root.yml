@@ -29,7 +29,7 @@ jobs:
         id: affected
         with:
           script: |
-            $tags = npm run --silent ng affected:apps -- --plain --base=origin/main~1 --head=main
+            $tags = npm run --silent nx print-affected -- --select=projects --type=app --base=origin/main~1 --head=main
             return ConvertTo-Json $tags.Trim().Split(" ")
   dispatch_event:
     needs: [build_affected]
