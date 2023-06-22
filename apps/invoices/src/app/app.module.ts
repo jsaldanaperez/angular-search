@@ -8,16 +8,14 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
-import { InvoiceListComponent } from './invoice-list/invoice-list.component';
-import { InvoiceDetailsComponent } from './invoice-details/invoice-details.component';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent, InvoiceListComponent, InvoiceDetailsComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot([ { path: '', loadChildren: () => import('./remote-entry/entry.module').then(m => m.RemoteEntryModule)}], { initialNavigation: 'enabledBlocking' }),
+    RouterModule.forRoot([ { path: '', loadChildren: () => import('./remote-entry/entry.module')}], { initialNavigation: 'enabledBlocking' }),
   ],
   providers: [],
   bootstrap: [AppComponent],

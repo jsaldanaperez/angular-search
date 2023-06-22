@@ -7,7 +7,7 @@ import { CustomersFacadeService } from '@app/customers/domain-logic';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })
-export class SearchComponent{ 
+export class SearchComponent{
   public editCustomer?: SearchItem;
   constructor(private customersFacadeService: CustomersFacadeService){ }
 

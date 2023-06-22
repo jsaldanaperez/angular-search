@@ -11,7 +11,7 @@ import { InvoicesFacadeService } from '@app/invoices/domain-logic';
 export class SearchComponent {
   public createInvoiceForCustomer?: SearchItem;
   public editInvoice?: SearchItem;
-  
+
   constructor(
     private invoicesFacadeService: InvoicesFacadeService,
     private customersFacadeService: CustomersFacadeService){ }

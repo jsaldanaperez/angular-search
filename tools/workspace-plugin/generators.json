@@ -1,0 +1,9 @@
+{
+  "generators": {
+    "add-search": {
+      "implementation": "./src/generators/add-search",
+      "schema": "./src/generators/add-search/schema.json",
+      "description": "Generator add-search"
+    }
+  }
+}

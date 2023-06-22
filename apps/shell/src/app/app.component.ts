@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent { 
+export class AppComponent {
 
   constructor(private searchService: SearchService, private router: Router){
     this.searchService.selected$.subscribe((selection) =>{
@@ -21,5 +21,5 @@ export class AppComponent {
         this.router.navigate([path]);
       }
     })
-  }  
+  }
 }

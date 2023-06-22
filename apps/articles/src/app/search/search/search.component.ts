@@ -7,7 +7,7 @@ import { ArticlesFacadeService } from '@app/articles/domain-logic';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
 })
-export class SearchComponent{  
+export class SearchComponent{
   public editArticle?: SearchItem;
 
   constructor(private articlesFacadeService: ArticlesFacadeService){ }

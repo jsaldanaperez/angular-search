@@ -1,14 +1,13 @@
 {
+  "name": "articles",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "root": "apps/articles",
   "sourceRoot": "apps/articles/src",
   "prefix": "app",
   "targets": {
     "build": {
-      "executor": "@nrwl/angular:webpack-browser",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "executor": "@nx/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/articles",
         "index": "apps/articles/src/index.html",
@@ -17,13 +16,8 @@
         "preserveSymlinks": true,
         "tsConfig": "apps/articles/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": [
-          "apps/articles/src/favicon.ico",
-          "apps/articles/src/assets"
-        ],
-        "styles": [
-          "apps/articles/src/styles.scss"
-        ],
+        "assets": ["apps/articles/src/favicon.ico", "apps/articles/src/assets"],
+        "styles": ["apps/articles/src/styles.scss"],
         "scripts": [],
         "customWebpackConfig": {
           "path": "apps/articles/webpack.config.js"
@@ -67,7 +61,7 @@
       "defaultConfiguration": "production"
     },
     "serve": {
-      "executor": "@nrwl/angular:webpack-server",
+      "executor": "@nx/angular:webpack-dev-server",
       "configurations": {
         "production": {
           "browserTarget": "articles:build:production"
@@ -89,7 +83,7 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": [
           "apps/articles/src/**/*.ts",
@@ -98,12 +92,10 @@
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/apps/articles"
-      ],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/articles"],
       "options": {
-        "jestConfig": "apps/articles/jest.config.js",
+        "jestConfig": "apps/articles/jest.config.ts",
         "passWithNoTests": true
       }
     }

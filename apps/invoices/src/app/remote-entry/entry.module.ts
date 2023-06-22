@@ -1,12 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { InvoiceListComponent } from '../invoice-list/invoice-list.component';
-import { InvoiceDetailsComponent } from '../invoice-details/invoice-details.component';
+import { InvoiceListComponent } from './invoice-list/invoice-list.component';
+import { InvoiceDetailsComponent } from './invoice-details/invoice-details.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
+  declarations: [ InvoiceListComponent, InvoiceDetailsComponent],
   imports: [
     CommonModule,
+    FormsModule,
     RouterModule.forChild([
       { path: '', component: InvoiceListComponent },
       { path: 'create', component: InvoiceDetailsComponent },
@@ -15,4 +18,4 @@ import { InvoiceDetailsComponent } from '../invoice-details/invoice-details.comp
   ],
   providers: [],
 })
-export class RemoteEntryModule {}
+export default class RemoteEntryModule {}

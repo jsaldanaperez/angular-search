@@ -3,16 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
-import { ArticleListComponent } from './article-list/article-list.component';
-import { ArticleDetailsComponent } from './article-details/article-details.component';
-import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent, ArticleListComponent, ArticleDetailsComponent],
+  declarations: [AppComponent],
   imports: [
-    FormsModule,
     BrowserModule,
-    RouterModule.forRoot([], { initialNavigation: 'enabledBlocking' }),
+    RouterModule.forRoot([ { path:'', loadChildren: () => import('./remote-entry/remote-entry.module') }], { initialNavigation: 'enabledBlocking' }),
   ],
   providers: [],
   bootstrap: [AppComponent],

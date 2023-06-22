@@ -8,9 +8,9 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "ES2020",
+    "target": "ES2022",
     "module": "esnext",
-    "lib": ["es2017", "dom"],
+    "lib": ["ES2023", "DOM"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
@@ -20,7 +20,8 @@
         "libs/customers/domain-logic/src/index.ts"
       ],
       "@app/invoices/domain-logic": ["libs/invoices/domain-logic/src/index.ts"],
-      "@app/shared/search": ["libs/shared/search/src/index.ts"]
+      "@app/shared/search": ["libs/shared/search/src/index.ts"],
+      "@app/workspace-plugin": ["tools/workspace-plugin/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

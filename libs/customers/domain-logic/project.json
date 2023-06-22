@@ -1,12 +1,13 @@
 {
+  "name": "customers-domain-logic",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "root": "libs/customers/domain-logic",
   "sourceRoot": "libs/customers/domain-logic/src",
   "prefix": "app",
   "targets": {
     "build": {
-      "executor": "@nrwl/angular:ng-packagr-lite",
-      "outputs": ["dist/libs/customers/domain-logic"],
+      "executor": "@nx/angular:ng-packagr-lite",
+      "outputs": ["{workspaceRoot}/dist/libs/customers/domain-logic"],
       "options": {
         "project": "libs/customers/domain-logic/ng-package.json"
       },
@@ -21,15 +22,15 @@
       "defaultConfiguration": "production"
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/customers/domain-logic"],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/customers/domain-logic"],
       "options": {
-        "jestConfig": "libs/customers/domain-logic/jest.config.js",
+        "jestConfig": "libs/customers/domain-logic/jest.config.ts",
         "passWithNoTests": true
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": [
           "libs/customers/domain-logic/src/**/*.ts",

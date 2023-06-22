@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { SharedSearchModule } from '@app/shared/search';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { loadRemoteModule } from '@nx/angular/mf';
 
 @NgModule({
   declarations: [AppComponent, DashboardComponent],
@@ -19,39 +20,35 @@ import { DashboardComponent } from './dashboard/dashboard.component';
         {
           path: '',
           loadChildren: () =>
-            import('articles/SearchModule').then((m) => m.SearchModule),
+          loadRemoteModule('articles', './SearchModule').then((m) => m.SearchModule),
           outlet: 'articles',
         },
         {
           path: '',
           loadChildren: () =>
-            import('customers/SearchModule').then((m) => m.SearchModule),
+          loadRemoteModule('customers', './SearchModule').then((m) => m.SearchModule),
           outlet: 'customers',
         },
         {
           path: '',
           loadChildren: () =>
-            import('invoices/SearchModule').then((m) => m.SearchModule),
+          loadRemoteModule('invoices', './SearchModule').then((m) => m.SearchModule),
           outlet: 'invoices',
         },
         {
           path: 'articles',
           loadChildren: () =>
-            import('articles/RemoteEntryModule').then(
-              (m) => m.RemoteEntryModule
-            ),
+          loadRemoteModule('articles', './RemoteEntryModule') ,
         },
         {
           path: 'customers',
           loadChildren: () =>
-            import('customers/RemoteEntryModule').then(
-              (m) => m.RemoteEntryModule
-            ),
+          loadRemoteModule('customers', './RemoteEntryModule'),
         },
         {
           path: 'invoices',
           loadChildren: () =>
-            import('invoices/Module').then((m) => m.RemoteEntryModule),
+          loadRemoteModule('invoices', './RemoteEntryModule') ,
         },
       ],
       { initialNavigation: 'enabledBlocking' }

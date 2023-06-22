@@ -4,6 +4,11 @@
 
 export const environment = {
   production: false,
+  remotes: {
+    articles: 'http://localhost:4201',
+    customers: 'http://localhost:4202',
+    invoices: 'http://localhost:4203',
+  },
 };
 
 /*

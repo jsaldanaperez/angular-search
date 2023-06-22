@@ -1,12 +1,13 @@
 {
+  "name": "shared-search",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "root": "libs/shared/search",
   "sourceRoot": "libs/shared/search/src",
   "prefix": "app",
   "targets": {
     "build": {
-      "executor": "@nrwl/angular:ng-packagr-lite",
-      "outputs": ["dist/libs/shared/search"],
+      "executor": "@nx/angular:ng-packagr-lite",
+      "outputs": ["{workspaceRoot}/dist/libs/shared/search"],
       "options": {
         "project": "libs/shared/search/ng-package.json"
       },
@@ -21,15 +22,15 @@
       "defaultConfiguration": "production"
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/shared/search"],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/shared/search"],
       "options": {
-        "jestConfig": "libs/shared/search/jest.config.js",
+        "jestConfig": "libs/shared/search/jest.config.ts",
         "passWithNoTests": true
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": [
           "libs/shared/search/src/**/*.ts",
