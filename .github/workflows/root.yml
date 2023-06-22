@@ -30,7 +30,7 @@ jobs:
         with:
           script: |
             $tags = npm run --silent nx print-affected -- --select=projects --type=app --base=origin/main~1 --head=main
-            return ConvertTo-Json $tags.Trim().Split(" ")
+            return ConvertTo-Json $tags.Trim().Split(',').Trim()
   dispatch_event:
     needs: [build_affected]
     runs-on: ubuntu-latest
