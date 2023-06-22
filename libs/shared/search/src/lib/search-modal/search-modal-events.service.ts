@@ -14,10 +14,8 @@ export class SearchModalEventsService{
     private modal!: ElementRef;
     private showSearchValue = false;
     private showSearchSubject = new Subject<boolean>();
-
     private closeButtonIndex = 0;
     private searchControlIndex = 1;
-
     public showSearch$ = this.showSearchSubject.asObservable();
 
     private set showSearch(value: boolean){
@@ -53,9 +51,9 @@ export class SearchModalEventsService{
     private subscribeToActivateEvent(): void{
         fromEvent<KeyboardEvent>(window, 'keydown')
             .pipe(filter(() => !this.showSearch))
-            .subscribe((event) =>{ 
+            .subscribe((event) =>{
             if(event.ctrlKey && event.key === ' ' && !this.showSearch){
-                this.windowScrollingService.disable(); 
+                this.windowScrollingService.disable();
                 this.modal.nativeElement.style.display = 'block';
                 setTimeout(() => {
                 this.showSearch = true;
@@ -98,7 +96,7 @@ export class SearchModalEventsService{
         .subscribe((index) => {
             switch(index){
             case this.closeButtonIndex: this.focus(this.closeButton); break;
-            case this.searchControlIndex: 
+            case this.searchControlIndex:
                 this.focus(this.searchControl);
                 setTimeout(() => this.searchControl.nativeElement.select());
                 break;
@@ -113,8 +111,8 @@ export class SearchModalEventsService{
         const onItemSelectedObservable = this.searchService.selected$;
 
         merge(
-        clickOutsideOfModalObservable, 
-        closeButtonClickObservale, 
+        clickOutsideOfModalObservable,
+        closeButtonClickObservale,
         onItemSelectedObservable)
         .subscribe(this.hideNavigation);
     }
