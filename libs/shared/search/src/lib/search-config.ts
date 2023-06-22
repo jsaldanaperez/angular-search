@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Observable } from 'rxjs';
 
 export class SearchConfig{
@@ -15,8 +14,8 @@ export class SearchConfig{
         onReset: () => void
     }): SearchConfig {
         return new SearchConfig(
-            <() => Observable<Record<string, unknown>>>config.onSearch, 
-            <(result: Record<string, unknown>) => void>config.onResult, 
+            <() => Observable<Record<string, unknown>>>config.onSearch,
+            <(result: Record<string, unknown>) => void>config.onResult,
             config.onReset);
     }
 }
